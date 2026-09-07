@@ -442,6 +442,73 @@ section{
 }
 
 /* =========================================================
+   CANDIDATES
+========================================================= */
+
+.candidates{
+    background:#0a0a0a;
+}
+
+.candidates-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.candidate-card{
+    background:#131313;
+    border:1px solid #222;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.candidate-card:hover{
+    border-color:var(--gold);
+    transform:translateY(-5px);
+}
+
+.candidate-img{
+    height:280px;
+    background:#222;
+}
+
+.candidate-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.candidate-info{
+    padding:25px;
+}
+
+.candidate-info h3{
+    color:var(--gold);
+    font-size:20px;
+    margin-bottom:5px;
+}
+
+.candidate-info span{
+    color:#777;
+    font-size:13px;
+    display:block;
+    margin-bottom:12px;
+}
+
+.candidate-info p{
+    color:#bbb;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.vote-btn{
+    width:100%;
+    padding:10px;
+    text-align:center;
+    font-size:14px;
+}
+
+/* =========================================================
    SPONSORS
 ========================================================= */
 
@@ -611,7 +678,8 @@ html[dir="rtl"] .section-title p{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .decor-grid{
+    .decor-grid,
+    .candidates-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
@@ -641,7 +709,8 @@ html[dir="rtl"] .section-title p{
     .stats,
     .format-grid,
     .features,
-    .decor-grid{
+    .decor-grid,
+    .candidates-grid{
         grid-template-columns:1fr;
     }
 
@@ -694,6 +763,7 @@ html[dir="rtl"] .section-title p{
 <a href="#about" data-i18n="navAbout">Concept</a>
 <a href="#format" data-i18n="navFormat">Format</a>
 <a href="#decor" data-i18n="navDecor">Décor</a>
+<a href="#candidates" data-i18n="navCandidates">Candidates</a>
 <a href="#sponsors" data-i18n="navSponsors">Sponsors</a>
 <a href="#contact" data-i18n="navContact">Contact</a>
 
@@ -1154,6 +1224,73 @@ html[dir="rtl"] .section-title p{
 
 
 <!-- =====================================================
+     CANDIDATES / VOTING
+===================================================== -->
+
+<section class="candidates" id="candidates">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="candidatesSmall">Le Casting</small>
+<h2 data-i18n="candidatesTitle">Les Candidates & Vote du Public</h2>
+<p data-i18n="candidatesIntro">Découvrez les talents de cette édition et soutenez votre candidate préférée en votant.</p>
+</div>
+
+<div class="candidates-grid">
+
+<!-- Candidate 1 -->
+<div class="candidate-card">
+<div class="candidate-img">
+    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Inès Benali">
+</div>
+<div class="candidate-info">
+    <h3>Inès Benali</h3>
+    <span data-i18n="c1Age">24 ans — Paris</span>
+    <p data-i18n="c1Desc">Passionnée de comédie et de mode.</p>
+    <button class="btn btn-gold vote-btn" onclick="voteFor('c1', this)">
+        <span data-i18n="voteText">Voter</span> (<span id="votes-c1">1240</span>)
+    </button>
+</div>
+</div>
+
+<!-- Candidate 2 -->
+<div class="candidate-card">
+<div class="candidate-img">
+    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Sarah Kettani">
+</div>
+<div class="candidate-info">
+    <h3>Sarah Kettani</h3>
+    <span data-i18n="c2Age">26 ans — Casablanca</span>
+    <p data-i18n="c2Desc">Entrepreneure et passionnée d'art dramatique.</p>
+    <button class="btn btn-gold vote-btn" onclick="voteFor('c2', this)">
+        <span data-i18n="voteText">Voter</span> (<span id="votes-c2">980</span>)
+    </button>
+</div>
+</div>
+
+<!-- Candidate 3 -->
+<div class="candidate-card">
+<div class="candidate-img">
+    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" alt="Lina Mansour">
+</div>
+<div class="candidate-info">
+    <h3>Lina Mansour</h3>
+    <span data-i18n="c3Age">22 ans — Montréal</span>
+    <p data-i18n="c3Desc">Étudiante en journalisme et mannequin.</p>
+    <button class="btn btn-gold vote-btn" onclick="voteFor('c3', this)">
+        <span data-i18n="voteText">Voter</span> (<span id="votes-c3">1450</span>)
+    </button>
+</div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
      SPONSORS
 ===================================================== -->
 
@@ -1343,6 +1480,10 @@ data-i18n="contactButton">
 </p>
 
 <p>
+<a href="#candidates" data-i18n="navCandidates">Candidates</a>
+</p>
+
+<p>
 <a href="#sponsors" data-i18n="navSponsors">Sponsors</a>
 </p>
 
@@ -1398,6 +1539,31 @@ function toggleMenu(){
 
 
 /* =========================================================
+   VOTING FUNCTION
+========================================================= */
+
+function voteFor(candidateId, btnElement) {
+    const hasVoted = localStorage.getItem("voted_" + candidateId);
+    
+    if (hasVoted) {
+        alert("Vous avez déjà voté pour cette candidate !");
+        return;
+    }
+
+    let countSpan = document.getElementById("votes-" + candidateId);
+    let currentVotes = parseInt(countSpan.textContent);
+    currentVotes++;
+    countSpan.textContent = currentVotes;
+
+    localStorage.setItem("voted_" + candidateId, "true");
+    btnElement.style.background = "#333";
+    btnElement.style.color = "var(--gold)";
+    btnElement.style.borderColor = "var(--gold)";
+    btnElement.disabled = true;
+}
+
+
+/* =========================================================
    TRANSLATIONS
 ========================================================= */
 
@@ -1409,6 +1575,7 @@ navHome:"Accueil",
 navAbout:"Concept",
 navFormat:"Format",
 navDecor:"Décor",
+navCandidates:"Candidates",
 navSponsors:"Sponsors",
 navContact:"Contact",
 
@@ -1497,6 +1664,17 @@ marketText:"Un véritable espace de course pour les défis de gestion, rapidité
 streetTitle:"Rue commerçante",
 streetText:"Boutiques de mode, beauté et décoration pour tester le goût, le style et l’intelligence pratique.",
 
+candidatesSmall:"Le Casting",
+candidatesTitle:"Les Candidates & Vote du Public",
+candidatesIntro:"Découvrez les talents de cette édition et soutenez votre candidate préférée en votant.",
+voteText:"Voter",
+c1Age:"24 ans — Paris",
+c1Desc:"Passionnée de comédie et de mode.",
+c2Age:"26 ans — Casablanca",
+c2Desc:"Entrepreneure et passionnée d'art dramatique.",
+c3Age:"22 ans — Montréal",
+c3Desc:"Étudiante en journalisme et mannequin.",
+
 sponsorSmall:"Partenariat",
 sponsorTitle:"Une visibilité forte pour les marques",
 
@@ -1542,6 +1720,7 @@ navHome:"الرئيسية",
 navAbout:"فكرة البرنامج",
 navFormat:"الفورما",
 navDecor:"الديكور",
+navCandidates:"المشتركات",
 navSponsors:"الرعاة",
 navContact:"اتصل بنا",
 
@@ -1630,6 +1809,17 @@ marketText:"فضاء حقيقي للتسوق تُقام فيه تحديات ال
 streetTitle:"شارع تجاري",
 streetText:"محلات للموضة والجمال والديكور لاختبار الذوق والأسلوب والذكاء العملي.",
 
+candidatesSmall:"المترشحات",
+candidatesTitle:"المشتركات وتصويت الجمهور",
+candidatesIntro:"تعرفي على مواهب هذا الموسم وادعمي مرشحتك المفضلة بالتصويت.",
+voteText:"صوت",
+c1Age:"24 سنة — باريس",
+c1Desc:"شغوفة بالكوميديا والموضة.",
+c2Age:"26 سنة — الدار البيضاء",
+c2Desc:"رائدة أعمال وشغوفة بالفن الدرامي.",
+c3Age:"22 سنة — مونتريال",
+c3Desc:"طالبة صحافة وعارضة أزياء.",
+
 sponsorSmall:"الشراكة",
 sponsorTitle:"ظهور قوي للعلامات التجارية",
 
@@ -1639,232 +1829,4 @@ sponsor1Title:"الظهور التلفزيوني",
 sponsor1Text:"Billboard قبل وبعد كل حلقة وPrime، بالإضافة إلى الظهور في العروض الترويجية والإعلانات قبل وبعد ووسط البرنامج.",
 
 sponsor2Title:"دمج المنتج",
-sponsor2Text:"إمكانية إدماج المنتج داخل الحلقات اليومية للبرنامج.",
-
-sponsor3Title:"شبكات التواصل",
-sponsor3Text:"ظهور العلامة التجارية على شبكات البرنامج الاجتماعية، خصوصاً Instagram وFacebook.",
-
-sponsor4Title:"علامة الراعي على ملابس المشاركات",
-sponsor4Text:"إظهار شعار العلامة التجارية على القمصان التي ترتديها المشاركات.",
-
-sponsor5Title:"سهرة التتويج",
-sponsor5Text:"حضور الراعي على مختلف وسائل الاتصال الخاصة بسهرة التتويج، مثل المجلات والصحف وصفحة Facebook والملصقات.",
-
-sponsor6Title:"تجربة الشريك",
-sponsor6Text:"ذكر وشكر الراعي من طرف المقدمة خلال كل Prime، إضافة إلى فرص الظهور والتصوير الاحترافي.",
-
-ctaTitle:"انضم إلى المغامرة",
-
-ctaText:"هل أنت علامة تجارية أو وسيلة إعلام أو شريك أو محترف مهتم بالمشروع؟ تواصل مع الإنتاج.",
-
-contactButton:"اتصل بالإنتاج",
-
-footerDescription:"برنامج تلفزيون واقع مبتكر، مغامرة إنسانية ومنصة لاكتشاف المواهب.",
-
-footerNavigation:"التنقل",
-footerProject:"المشروع",
-footerFormat:"الفورما: 30 حلقة",
-footerDuration:"المدة: ساعة واحدة"
-
-},
-
-
-en:{
-
-navHome:"Home",
-navAbout:"Concept",
-navFormat:"Format",
-navDecor:"Set Design",
-navSponsors:"Sponsors",
-navContact:"Contact",
-
-heroBadge:"Reality TV Show",
-
-heroTitle1:"The Challenges",
-heroTitle2:"of a Princess",
-
-heroDescription:
-"A human adventure, a talent reveal and a platform for ambitious women of today.",
-
-discover:"Discover the show",
-beSponsor:"Become a partner",
-
-aboutSmall:"The concept",
-
-aboutTitle:"More than a beauty contest",
-
-aboutIntro:
-"A new approach to reality television placing personality, talent and professional development at the heart of the adventure.",
-
-aboutText1:
-"The Challenges of a Princess is an innovative reality TV show aiming to crown a new «Miss presque parfait», moving beyond the traditional standards of international beauty contests.",
-
-aboutText2:
-"More than a beauty contest, the show offers a genuine professional development journey. Participants are encouraged to pursue their ambitions in acting, television presenting and modelling.",
-
-aboutText3:
-"Each candidate is invited to express her personality, creativity and build her professional identity.",
-
-evaluationTitle:"Multi-criteria evaluation",
-
-evaluation1:"Fashion style and originality",
-evaluation2:"Lifestyle, nutrition, wellness and physical activity",
-evaluation3:"Behaviour, charisma and communication skills",
-evaluation4:"Commitment and performance in daily challenges",
-evaluation5:"Jury expertise and audience voting",
-
-formatSmall:"TV Format",
-formatTitle:"A format designed for television",
-
-episodes:"Episodes",
-duration:"Duration",
-content:"Minutes of content",
-quality:"Full HD",
-
-format1:"Billboard IN: 5 seconds",
-format2:"Opening credits: 1 minute",
-format3:"Billboard OUT: 5 seconds",
-format4:"Advertising: 5 minutes",
-format5:"5 jingles × 3 seconds",
-format6:"Closing credits: 1 minute 30 seconds",
-
-mechanismSmall:"The mechanism",
-mechanismTitle:"Five elements at the heart of the adventure",
-
-feature1Title:"Pre-selection",
-feature1Text:"Candidates are pre-selected according to psychological and physical profiles to ensure a coherent and engaging casting.",
-
-feature2Title:"Celebrities & professionals",
-feature2Text:"A celebrity regularly joins the candidates to provide advice and introduce a new dynamic.",
-
-feature3Title:"Elimination",
-feature3Text:"An elimination system based on jury evaluations, scores and audience voting.",
-
-feature4Title:"Challenges & missions",
-feature4Text:"Missions and tasks designed to maintain a constant television rhythm and encourage creativity.",
-
-feature5Title:"The Confessional",
-feature5Text:"A private space where candidates can express their thoughts, emotions and relationships within the group.",
-
-decorSmall:"The universe",
-decorTitle:"A set designed as a playground",
-
-decorIntro:"A fixed set designed as a true microcosm of the lifestyle dreamed of by the candidates.",
-
-villaTitle:"Elegant Villa",
-villaText:"A large living room, open kitchen and themed bedrooms where conversations, friendships and tensions unfold.",
-
-gymTitle:"Design Gym",
-gymText:"Modern equipment, yoga space and mirror wall dedicated to wellness and self-improvement.",
-
-marketTitle:"Full-scale Hypermarket",
-marketText:"A real shopping environment for challenges involving management, speed and culinary creativity.",
-
-streetTitle:"Stylized Shopping Street",
-streetText:"Fashion, beauty and decoration boutiques designed to test taste, style and practical intelligence.",
-
-sponsorSmall:"Partnership",
-sponsorTitle:"Strong brand visibility",
-
-sponsorIntro:"The show offers multiple visibility and brand integration opportunities for sponsors and partners.",
-
-sponsor1Title:"TV Visibility",
-sponsor1Text:"IN/OUT billboards for every episode and prime, promotional exposure and spots before, after and during the programme.",
-
-sponsor2Title:"Product Placement",
-sponsor2Text:"Product placement opportunities within the daily episodes.",
-
-sponsor3Title:"Social Media",
-sponsor3Text:"Brand presence across the show's social media platforms, including Instagram and Facebook.",
-
-sponsor4Title:"Candidate Branding",
-sponsor4Text:"Brand logo displayed on T-shirts worn by the candidates.",
-
-sponsor5Title:"Crowning Ceremony",
-sponsor5Text:"Sponsor presence across communication materials for the crowning ceremony, including magazines, newspapers, Facebook page and posters.",
-
-sponsor6Title:"Partner Experience",
-sponsor6Text:"Sponsor mentions and acknowledgements by the presenter during each prime, as well as visibility opportunities and professional shooting.",
-
-ctaTitle:"Join the adventure",
-
-ctaText:"Are you a brand, media outlet, partner or professional interested in the project? Contact the production team.",
-
-contactButton:"Contact Production",
-
-footerDescription:"An innovative reality TV show, a human adventure and a platform for discovering talent.",
-
-footerNavigation:"Navigation",
-footerProject:"Project",
-footerFormat:"Format: 30 episodes",
-footerDuration:"Duration: 1 hour"
-
-}
-
-};
-
-
-/* =========================================================
-   CHANGE LANGUAGE
-========================================================= */
-
-function changeLanguage(lang){
-
-    const data = translations[lang];
-
-    document.documentElement.lang = lang;
-
-    if(lang === "ar"){
-
-        document.documentElement.dir = "rtl";
-
-    }else{
-
-        document.documentElement.dir = "ltr";
-
-    }
-
-    document.body.classList.add("fade");
-
-    setTimeout(()=>{
-
-        document.querySelectorAll("[data-i18n]").forEach(element=>{
-
-            const key = element.getAttribute("data-i18n");
-
-            if(data[key]){
-
-                element.textContent = data[key];
-
-            }
-
-        });
-
-        document.body.classList.remove("fade");
-
-    },150);
-
-    localStorage.setItem("preferredLanguage",lang);
-
-}
-
-
-/* =========================================================
-   LOAD SAVED LANGUAGE
-========================================================= */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-    const savedLanguage =
-        localStorage.getItem("preferredLanguage") || "fr";
-
-    document.getElementById("language").value = savedLanguage;
-
-    changeLanguage(savedLanguage);
-
-});
-
-</script>
-
-</body>
-</html>
+sponsor2Text:"إمكانية إدماج المنتج داخل الحلقات اليومية 
