@@ -26,10 +26,11 @@ html{
 
 body{
     font-family:Arial, Helvetica, sans-serif;
-    background:#080808;
-    color:#fff;
+    background:var(--black);
+    color:var(--white);
     line-height:1.6;
     overflow-x:hidden;
+    transition:background .3s, color .3s;
 }
 
 a{
@@ -43,7 +44,7 @@ img{
 }
 
 /* =========================================================
-   VARIABLES
+   VARIABLES (Default: Gold & Black)
 ========================================================= */
 
 :root{
@@ -54,6 +55,21 @@ img{
     --dark2:#181818;
     --gray:#aaa;
     --white:#fff;
+    --card-bg:#131313;
+    --border-color:#222;
+}
+
+/* Theme: Pink (Light/Glamour) */
+body.theme-pink{
+    --gold:#ff6584;
+    --gold-light:#ffb1c1;
+    --black:#120b0e;
+    --dark:#1d1217;
+    --dark2:#281820;
+    --gray:#d1b2be;
+    --white:#fff;
+    --card-bg:#1f1319;
+    --border-color:#3a202d;
 }
 
 /* =========================================================
@@ -66,9 +82,15 @@ header{
     left:0;
     width:100%;
     z-index:999;
-    background:rgba(0,0,0,.88);
+    background:rgba(8,8,8,.88);
     backdrop-filter:blur(12px);
     border-bottom:1px solid rgba(212,175,55,.25);
+    transition:background .3s, border-color .3s;
+}
+
+body.theme-pink header{
+    background:rgba(18,11,14,.88);
+    border-bottom:1px solid rgba(255,101,132,.25);
 }
 
 .navbar{
@@ -91,14 +113,14 @@ header{
     display:block;
     font-size:10px;
     letter-spacing:4px;
-    color:#fff;
+    color:var(--white);
     margin-top:2px;
 }
 
 nav{
     display:flex;
     align-items:center;
-    gap:25px;
+    gap:20px;
 }
 
 nav a{
@@ -111,13 +133,26 @@ nav a:hover{
     color:var(--gold);
 }
 
-.language{
-    background:#151515;
-    color:#fff;
+.controls-container{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.language, .theme-toggle{
+    background:var(--dark2);
+    color:var(--white);
     border:1px solid var(--gold);
     padding:8px 12px;
     border-radius:5px;
     cursor:pointer;
+    font-size:13px;
+    transition:.3s;
+}
+
+.theme-toggle:hover{
+    background:var(--gold);
+    color:#000;
 }
 
 /* =========================================================
@@ -135,6 +170,12 @@ nav a:hover{
     overflow:hidden;
 }
 
+body.theme-pink .hero{
+    background:
+    radial-gradient(circle at 70% 30%,rgba(255,101,132,.18),transparent 35%),
+    linear-gradient(120deg,#0b0507,#1d1217,#0b0507);
+}
+
 .hero:after{
     content:"";
     position:absolute;
@@ -145,6 +186,10 @@ nav a:hover{
     border-radius:50%;
     background:rgba(212,175,55,.12);
     filter:blur(80px);
+}
+
+body.theme-pink .hero:after{
+    background:rgba(255,101,132,.12);
 }
 
 .hero-content{
@@ -184,7 +229,7 @@ nav a:hover{
 .hero p{
     max-width:650px;
     margin:30px 0;
-    color:#ccc;
+    color:var(--gray);
     font-size:18px;
 }
 
@@ -252,7 +297,7 @@ section{
 
 .section-title p{
     max-width:700px;
-    color:#aaa;
+    color:var(--gray);
     margin-top:15px;
 }
 
@@ -261,7 +306,7 @@ section{
 ========================================================= */
 
 .about{
-    background:#0d0d0d;
+    background:var(--dark);
 }
 
 .about-grid{
@@ -272,7 +317,7 @@ section{
 }
 
 .about-text p{
-    color:#bbb;
+    color:var(--gray);
     margin-bottom:20px;
     font-size:17px;
 }
@@ -285,11 +330,14 @@ section{
 }
 
 .about-card{
-    background:
-    linear-gradient(145deg,#191919,#0b0b0b);
+    background:linear-gradient(145deg,var(--dark2),var(--black));
     border:1px solid rgba(212,175,55,.3);
     padding:40px;
     box-shadow:0 25px 70px rgba(0,0,0,.4);
+}
+
+body.theme-pink .about-card{
+    border:1px solid rgba(255,101,132,.3);
 }
 
 .about-card h3{
@@ -304,8 +352,8 @@ section{
 
 .about-card li{
     padding:13px 0;
-    border-bottom:1px solid #292929;
-    color:#ccc;
+    border-bottom:1px solid var(--border-color);
+    color:var(--gray);
 }
 
 .about-card li:before{
@@ -319,7 +367,7 @@ section{
 ========================================================= */
 
 .format{
-    background:#080808;
+    background:var(--black);
 }
 
 .stats{
@@ -332,8 +380,8 @@ section{
 .stat{
     text-align:center;
     padding:30px 15px;
-    background:#121212;
-    border:1px solid #252525;
+    background:var(--dark2);
+    border:1px solid var(--border-color);
 }
 
 .stat strong{
@@ -343,7 +391,7 @@ section{
 }
 
 .stat span{
-    color:#aaa;
+    color:var(--gray);
     font-size:13px;
 }
 
@@ -355,7 +403,7 @@ section{
 
 .format-card{
     padding:30px;
-    background:#111;
+    background:var(--dark);
     border-left:3px solid var(--gold);
 }
 
@@ -369,7 +417,7 @@ section{
 ========================================================= */
 
 .concept{
-    background:#101010;
+    background:var(--dark);
 }
 
 .features{
@@ -380,8 +428,8 @@ section{
 
 .feature{
     padding:30px;
-    background:#151515;
-    border:1px solid #252525;
+    background:var(--dark2);
+    border:1px solid var(--border-color);
     transition:.3s;
 }
 
@@ -402,7 +450,7 @@ section{
 }
 
 .feature p{
-    color:#aaa;
+    color:var(--gray);
 }
 
 /* =========================================================
@@ -410,7 +458,7 @@ section{
 ========================================================= */
 
 .decor{
-    background:#080808;
+    background:var(--black);
 }
 
 .decor-grid{
@@ -428,7 +476,13 @@ section{
     background:
     linear-gradient(to top,rgba(0,0,0,.95),rgba(0,0,0,.1)),
     linear-gradient(135deg,#302818,#101010);
-    border:1px solid #292929;
+    border:1px solid var(--border-color);
+}
+
+body.theme-pink .decor-card{
+    background:
+    linear-gradient(to top,rgba(0,0,0,.95),rgba(0,0,0,.1)),
+    linear-gradient(135deg,#301824,#120b0e);
 }
 
 .decor-card h3{
@@ -437,7 +491,7 @@ section{
 }
 
 .decor-card p{
-    color:#ccc;
+    color:var(--gray);
     font-size:14px;
 }
 
@@ -446,7 +500,7 @@ section{
 ========================================================= */
 
 .candidates{
-    background:#0a0a0a;
+    background:var(--dark);
 }
 
 .candidates-grid{
@@ -456,8 +510,8 @@ section{
 }
 
 .candidate-card{
-    background:#131313;
-    border:1px solid #222;
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
     overflow:hidden;
     transition:.3s;
 }
@@ -489,14 +543,14 @@ section{
 }
 
 .candidate-info span{
-    color:#777;
+    color:var(--gray);
     font-size:13px;
     display:block;
     margin-bottom:12px;
 }
 
 .candidate-info p{
-    color:#bbb;
+    color:var(--gray);
     font-size:14px;
     margin-bottom:20px;
 }
@@ -513,12 +567,12 @@ section{
 ========================================================= */
 
 .sponsors{
-    background:#101010;
+    background:var(--black);
 }
 
 .sponsor-intro{
     max-width:800px;
-    color:#aaa;
+    color:var(--gray);
     margin-bottom:40px;
 }
 
@@ -529,9 +583,9 @@ section{
 }
 
 .sponsor-card{
-    background:#151515;
+    background:var(--dark2);
     padding:30px;
-    border:1px solid #292929;
+    border:1px solid var(--border-color);
 }
 
 .sponsor-card h3{
@@ -540,7 +594,7 @@ section{
 }
 
 .sponsor-card p{
-    color:#aaa;
+    color:var(--gray);
     font-size:14px;
 }
 
@@ -553,7 +607,13 @@ section{
     text-align:center;
     background:
     radial-gradient(circle at center,rgba(212,175,55,.15),transparent 55%),
-    #080808;
+    var(--dark);
+}
+
+body.theme-pink .cta{
+    background:
+    radial-gradient(circle at center,rgba(255,101,132,.15),transparent 55%),
+    var(--dark);
 }
 
 .cta h2{
@@ -562,7 +622,7 @@ section{
 }
 
 .cta p{
-    color:#aaa;
+    color:var(--gray);
     max-width:700px;
     margin:0 auto 30px;
 }
@@ -571,9 +631,75 @@ section{
    FOOTER
 ========================================================= */
 
+<footer>
+
+<div class="footer-grid">
+
+<div>
+
+<div class="logo">
+    LES DÉFIS
+    <span>D’UNE PRINCESSE</span>
+</div>
+
+<br>
+
+<p data-i18n="footerDescription">
+    Une émission de téléréalité innovante,
+    aventure humaine et révélateur de talents.
+</p>
+
+</div>
+
+
+<div>
+
+<h3 class="footer-title" data-i18n="footerNavigation">
+    Navigation
+</h3>
+
+<p><a href="#home" data-i18n="navHome">Accueil</a></p>
+<p><a href="#about" data-i18n="navAbout">Concept</a></p>
+<p><a href="#format" data-i18n="navFormat">Format</a></p>
+<p><a href="#candidates" data-i18n="navCandidates">Candidates</a></p>
+<p><a href="#sponsors" data-i18n="navSponsors">Sponsors</a></p>
+
+</div>
+
+
+<div>
+
+<h3 class="footer-title" data-i18n="footerProject">
+    Projet
+</h3>
+
+<p data-i18n="footerFormat">
+    Format : 30 numéros
+</p>
+
+<p data-i18n="footerDuration">
+    Durée : 1 heure
+</p>
+
+<p>
+    Full HD / 1080P
+</p>
+
+</div>
+
+</div>
+
+
+<div class="copyright">
+© 2026 Les Défis d’une Princesse — Tous droits réservés.
+</div>
+
+</footer>
+
+<style>
 footer{
-    background:#050505;
-    border-top:1px solid #222;
+    background:var(--black);
+    border-top:1px solid var(--border-color);
     padding:50px 25px 25px;
 }
 
@@ -592,7 +718,7 @@ footer{
 
 footer p,
 footer a{
-    color:#888;
+    color:var(--gray);
     font-size:14px;
 }
 
@@ -604,13 +730,14 @@ footer a:hover{
     max-width:1150px;
     margin:40px auto 0;
     padding-top:20px;
-    border-top:1px solid #222;
+    border-top:1px solid var(--border-color);
     text-align:center;
-    color:#666;
+    color:var(--gray);
     font-size:12px;
 }
+</style>
 
-/* =========================================================
+<!-- =========================================================
    RTL
 ========================================================= */
 
@@ -656,7 +783,7 @@ html[dir="rtl"] .section-title p{
         top:70px;
         left:0;
         width:100%;
-        background:#080808;
+        background:var(--black);
         flex-direction:column;
         padding:25px;
         border-bottom:1px solid var(--gold);
@@ -767,11 +894,14 @@ html[dir="rtl"] .section-title p{
 <a href="#sponsors" data-i18n="navSponsors">Sponsors</a>
 <a href="#contact" data-i18n="navContact">Contact</a>
 
-<select class="language" id="language" onchange="changeLanguage(this.value)">
-<option value="fr">FR</option>
-<option value="ar">AR</option>
-<option value="en">EN</option>
-</select>
+<div class="controls-container">
+    <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" data-i18n="themeBtn">🌸 Rose</button>
+    <select class="language" id="language" onchange="changeLanguage(this.value)">
+    <option value="fr">FR</option>
+    <option value="ar">AR</option>
+    <option value="en">EN</option>
+    </select>
+</div>
 
 </nav>
 
@@ -1437,90 +1567,6 @@ data-i18n="contactButton">
 
 
 <!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-<div class="footer-grid">
-
-<div>
-
-<div class="logo">
-    LES DÉFIS
-    <span>D’UNE PRINCESSE</span>
-</div>
-
-<br>
-
-<p data-i18n="footerDescription">
-    Une émission de téléréalité innovante,
-    aventure humaine et révélateur de talents.
-</p>
-
-</div>
-
-
-<div>
-
-<h3 class="footer-title" data-i18n="footerNavigation">
-    Navigation
-</h3>
-
-<p>
-<a href="#home" data-i18n="navHome">Accueil</a>
-</p>
-
-<p>
-<a href="#about" data-i18n="navAbout">Concept</a>
-</p>
-
-<p>
-<a href="#format" data-i18n="navFormat">Format</a>
-</p>
-
-<p>
-<a href="#candidates" data-i18n="navCandidates">Candidates</a>
-</p>
-
-<p>
-<a href="#sponsors" data-i18n="navSponsors">Sponsors</a>
-</p>
-
-</div>
-
-
-<div>
-
-<h3 class="footer-title" data-i18n="footerProject">
-    Projet
-</h3>
-
-<p data-i18n="footerFormat">
-    Format : 30 numéros
-</p>
-
-<p data-i18n="footerDuration">
-    Durée : 1 heure
-</p>
-
-<p>
-    Full HD / 1080P
-</p>
-
-</div>
-
-</div>
-
-
-<div class="copyright">
-© 2026 Les Défis d’une Princesse — Tous droits réservés.
-</div>
-
-</footer>
-
-
-<!-- =====================================================
      JAVASCRIPT
 ===================================================== -->
 
@@ -1531,10 +1577,32 @@ data-i18n="contactButton">
 ========================================================= */
 
 function toggleMenu(){
+    document.getElementById("nav").classList.toggle("active");
+}
 
-    document.getElementById("nav")
-    .classList.toggle("active");
 
+/* =========================================================
+   THEME TOGGLE (Gold <-> Pink)
+========================================================= */
+
+function toggleTheme(){
+    const body = document.body;
+    const isPink = body.classList.toggle("theme-pink");
+    
+    const currentLang = document.documentElement.lang || "fr";
+    const themeBtn = document.getElementById("themeToggleBtn");
+    
+    if(isPink){
+        localStorage.setItem("preferredTheme", "pink");
+        if(currentLang === "ar") themeBtn.textContent = "⭐ ذهبي";
+        else if(currentLang === "en") themeBtn.textContent = "⭐ Gold";
+        else themeBtn.textContent = "⭐ Or";
+    } else {
+        localStorage.setItem("preferredTheme", "gold");
+        if(currentLang === "ar") themeBtn.textContent = "🌸 وردي";
+        else if(currentLang === "en") themeBtn.textContent = "🌸 Pink";
+        else themeBtn.textContent = "🌸 Rose";
+    }
 }
 
 
@@ -1556,7 +1624,7 @@ function voteFor(candidateId, btnElement) {
     countSpan.textContent = currentVotes;
 
     localStorage.setItem("voted_" + candidateId, "true");
-    btnElement.style.background = "#333";
+    btnElement.style.background = "var(--dark2)";
     btnElement.style.color = "var(--gold)";
     btnElement.style.borderColor = "var(--gold)";
     btnElement.disabled = true;
@@ -1578,6 +1646,7 @@ navDecor:"Décor",
 navCandidates:"Candidates",
 navSponsors:"Sponsors",
 navContact:"Contact",
+themeBtn:"🌸 Rose",
 
 heroBadge:"Émission de téléréalité",
 
@@ -1723,6 +1792,7 @@ navDecor:"الديكور",
 navCandidates:"المشتركات",
 navSponsors:"الرعاة",
 navContact:"اتصل بنا",
+themeBtn:"🌸 وردي",
 
 heroBadge:"برنامج تلفزيون الواقع",
 
@@ -1829,4 +1899,255 @@ sponsor1Title:"الظهور التلفزيوني",
 sponsor1Text:"Billboard قبل وبعد كل حلقة وPrime، بالإضافة إلى الظهور في العروض الترويجية والإعلانات قبل وبعد ووسط البرنامج.",
 
 sponsor2Title:"دمج المنتج",
-sponsor2Text:"إمكانية إدماج المنتج داخل الحلقات اليومية 
+sponsor2Text:"إمكانية إدماج المنتج داخل الحلقات اليومية للبرنامج.",
+
+sponsor3Title:"شبكات التواصل",
+sponsor3Text:"ظهور العلامة التجارية على شبكات البرنامج الاجتماعية، خصوصاً Instagram وFacebook.",
+
+sponsor4Title:"علامة الراعي على ملابس المشاركات",
+sponsor4Text:"إظهار شعار العلامة التجارية على القمصان التي ترتديها المشاركات.",
+
+sponsor5Title:"سهرة التتويج",
+sponsor5Text:"حضور الراعي على مختلف وسائل الاتصال الخاصة بسهرة التتويج، مثل المجلات والصحف وصفحة Facebook والملصقات.",
+
+sponsor6Title:"تجربة الشريك",
+sponsor6Text:"ذكر وشكر الراعي من طرف المقدمة خلال كل Prime، إضافة إلى فرص الظهور والتصوير الاحترافي.",
+
+ctaTitle:"انضم إلى المغامرة",
+
+ctaText:"هل أنت علامة تجارية أو وسيلة إعلام أو شريك أو محترف مهتم بالمشروع؟ تواصل مع الإنتاج.",
+
+contactButton:"اتصل بالإنتاج",
+
+footerDescription:"برنامج تلفزيون واقع مبتكر، مغامرة إنسانية ومنصة لاكتشاف المواهب.",
+
+footerNavigation:"التنقل",
+footerProject:"المشروع",
+footerFormat:"الفورما: 30 حلقة",
+footerDuration:"المدة: ساعة واحدة"
+
+},
+
+
+en:{
+
+navHome:"Home",
+navAbout:"Concept",
+navFormat:"Format",
+navDecor:"Set Design",
+navCandidates:"Candidates",
+navSponsors:"Sponsors",
+navContact:"Contact",
+themeBtn:"🌸 Pink",
+
+heroBadge:"Reality TV Show",
+
+heroTitle1:"The Challenges",
+heroTitle2:"of a Princess",
+
+heroDescription:
+"A human adventure, a talent reveal and a platform for ambitious women of today.",
+
+discover:"Discover the show",
+beSponsor:"Become a partner",
+
+aboutSmall:"The concept",
+
+aboutTitle:"More than a beauty contest",
+
+aboutIntro:
+"A new approach to reality television placing personality, talent and professional development at the heart of the adventure.",
+
+aboutText1:
+"The Challenges of a Princess is an innovative reality TV show aiming to crown a new «Miss presque parfait», moving beyond the traditional standards of international beauty contests.",
+
+aboutText2:
+"More than a beauty contest, the show offers a genuine professional development journey. Participants are encouraged to pursue their ambitions in acting, television presenting and modelling.",
+
+aboutText3:
+"Each candidate is invited to express her personality, creativity and build her professional identity.",
+
+evaluationTitle:"Multi-criteria evaluation",
+
+evaluation1:"Fashion style and originality",
+evaluation2:"Lifestyle, nutrition, wellness and physical activity",
+evaluation3:"Behaviour, charisma and communication skills",
+evaluation4:"Commitment and performance in daily challenges",
+evaluation5:"Jury expertise and audience voting",
+
+formatSmall:"TV Format",
+formatTitle:"A format designed for television",
+
+episodes:"Episodes",
+duration:"Duration",
+content:"Minutes of content",
+quality:"Full HD",
+
+format1:"Billboard IN: 5 seconds",
+format2:"Opening credits: 1 minute",
+format3:"Billboard OUT: 5 seconds",
+format4:"Advertising: 5 minutes",
+format5:"5 jingles × 3 seconds",
+format6:"Closing credits: 1 minute 30 seconds",
+
+mechanismSmall:"The mechanism",
+mechanismTitle:"Five elements at the heart of the adventure",
+
+feature1Title:"Pre-selection",
+feature1Text:"Candidates are pre-selected according to psychological and physical profiles to ensure a coherent and engaging casting.",
+
+feature2Title:"Celebrities & professionals",
+feature2Text:"A celebrity regularly joins the candidates to provide advice and introduce a new dynamic.",
+
+feature3Title:"Elimination",
+feature3Text:"An elimination system based on jury evaluations, scores and audience voting.",
+
+feature4Title:"Challenges & missions",
+feature4Text:"Missions and tasks designed to maintain a constant television rhythm and encourage creativity.",
+
+feature5Title:"The Confessional",
+feature5Text:"A private space where candidates can express their thoughts, emotions and relationships within the group.",
+
+decorSmall:"The universe",
+decorTitle:"A set designed as a playground",
+
+decorIntro:"A fixed set designed as a true microcosm of the lifestyle dreamed of by the candidates.",
+
+villaTitle:"Elegant Villa",
+villaText:"A large living room, open kitchen and themed bedrooms where conversations, friendships and tensions unfold.",
+
+gymTitle:"Design Gym",
+gymText:"Modern equipment, yoga space and mirror wall dedicated to wellness and self-improvement.",
+
+marketTitle:"Full-scale Hypermarket",
+marketText:"A real shopping environment for challenges involving management, speed and culinary creativity.",
+
+streetTitle:"Stylized Shopping Street",
+streetText:"Fashion, beauty and decoration boutiques designed to test taste, style and practical intelligence.",
+
+candidatesSmall:"The Casting",
+candidatesTitle:"Candidates & Public Voting",
+candidatesIntro:"Discover the talents of this edition and support your favorite candidate.",
+voteText:"Vote",
+c1Age:"24 yrs — Paris",
+c1Desc:"Passionate about comedy and fashion.",
+c2Age:"26 yrs — Casablanca",
+c2Desc:"Entrepreneur and passionate about drama.",
+c3Age:"22 yrs — Montreal",
+c3Desc:"Journalism student and model.",
+
+sponsorSmall:"Partnership",
+sponsorTitle:"Strong brand visibility",
+
+sponsorIntro:"The show offers multiple visibility and brand integration opportunities for sponsors and partners.",
+
+sponsor1Title:"TV Visibility",
+sponsor1Text:"IN/OUT billboards for every episode and prime, promotional exposure and spots before, after and during the programme.",
+
+sponsor2Title:"Product Placement",
+sponsor2Text:"Product placement opportunities within the daily episodes.",
+
+sponsor3Title:"Social Media",
+sponsor3Text:"Brand presence across the show's social media platforms, including Instagram and Facebook.",
+
+sponsor4Title:"Candidate Branding",
+sponsor4Text:"Brand logo displayed on T-shirts worn by the candidates.",
+
+sponsor5Title:"Crowning Ceremony",
+sponsor5Text:"Sponsor presence across communication materials for the crowning ceremony, including magazines, newspapers, Facebook page and posters.",
+
+sponsor6Title:"Partner Experience",
+sponsor6Text:"Sponsor mentions and acknowledgements by the presenter during each prime, as well as visibility opportunities and professional shooting.",
+
+ctaTitle:"Join the adventure",
+
+ctaText:"Are you a brand, media outlet, partner or professional interested in the project? Contact the production team.",
+
+contactButton:"Contact Production",
+
+footerDescription:"An innovative reality TV show, a human adventure and a platform for discovering talent.",
+
+footerNavigation:"Navigation",
+footerProject:"Project",
+footerFormat:"Format: 30 episodes",
+footerDuration:"Duration: 1 hour"
+
+}
+
+};
+
+
+/* =========================================================
+   CHANGE LANGUAGE
+========================================================= */
+
+function changeLanguage(lang){
+
+    const data = translations[lang];
+
+    document.documentElement.lang = lang;
+
+    if(lang === "ar"){
+        document.documentElement.dir = "rtl";
+    }else{
+        document.documentElement.dir = "ltr";
+    }
+
+    document.body.classList.add("fade");
+
+    setTimeout(()=>{
+
+        document.querySelectorAll("[data-i18n]").forEach(element=>{
+
+            const key = element.getAttribute("data-i18n");
+
+            if(data[key]){
+                element.textContent = data[key];
+            }
+
+        });
+
+        document.body.classList.remove("fade");
+
+    },150);
+
+    localStorage.setItem("preferredLanguage", lang);
+    
+    // Update theme button text according to active language and theme
+    const isPink = document.body.classList.contains("theme-pink");
+    const themeBtn = document.getElementById("themeToggleBtn");
+    if(isPink){
+        if(lang === "ar") themeBtn.textContent = "⭐ ذهبي";
+        else if(lang === "en") themeBtn.textContent = "⭐ Gold";
+        else themeBtn.textContent = "⭐ Or";
+    } else {
+        if(lang === "ar") themeBtn.textContent = "🌸 وردي";
+        else if(lang === "en") themeBtn.textContent = "🌸 Pink";
+        else themeBtn.textContent = "🌸 Rose";
+    }
+}
+
+
+/* =========================================================
+   LOAD SAVED SETTINGS
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    // Load Theme
+    const savedTheme = localStorage.getItem("preferredTheme");
+    if(savedTheme === "pink"){
+        document.body.classList.add("theme-pink");
+    }
+
+    // Load Language
+    const savedLanguage = localStorage.getItem("preferredLanguage") || "fr";
+    document.getElementById("language").value = savedLanguage;
+    changeLanguage(savedLanguage);
+
+});
+
+</script>
+
+</body>
+</html>
