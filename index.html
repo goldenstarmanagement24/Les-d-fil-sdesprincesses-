@@ -120,11 +120,11 @@ body.theme-pink header{
 nav{
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:18px;
 }
 
 nav a{
-    font-size:14px;
+    font-size:13px;
     text-transform:uppercase;
     transition:.3s;
 }
@@ -302,11 +302,44 @@ section{
 }
 
 /* =========================================================
+   TRAILER / VIDEO
+========================================================= */
+
+.trailer{
+    background:var(--dark);
+    text-align:center;
+}
+
+.video-container{
+    max-width:900px;
+    margin:0 auto;
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    padding:15px;
+    box-shadow:0 25px 50px rgba(0,0,0,.5);
+}
+
+.video-wrapper{
+    position:relative;
+    padding-bottom:56.25%; /* 16:9 */
+    height:0;
+}
+
+.video-wrapper iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:0;
+}
+
+/* =========================================================
    ABOUT
 ========================================================= */
 
 .about{
-    background:var(--dark);
+    background:var(--black);
 }
 
 .about-grid{
@@ -360,6 +393,65 @@ body.theme-pink .about-card{
     content:"✦";
     color:var(--gold);
     margin-right:10px;
+}
+
+/* =========================================================
+   JURY
+========================================================= */
+
+.jury{
+    background:var(--dark);
+}
+
+.jury-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.jury-card{
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    overflow:hidden;
+    transition:.3s;
+}
+
+.jury-card:hover{
+    border-color:var(--gold);
+    transform:translateY(-5px);
+}
+
+.jury-img{
+    height:280px;
+    background:#222;
+}
+
+.jury-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.jury-info{
+    padding:25px;
+}
+
+.jury-info h3{
+    color:var(--gold);
+    font-size:20px;
+    margin-bottom:5px;
+}
+
+.jury-info span{
+    color:var(--gray);
+    font-size:13px;
+    display:block;
+    margin-bottom:12px;
+}
+
+.jury-info p{
+    color:var(--gray);
+    font-size:14px;
 }
 
 /* =========================================================
@@ -563,6 +655,71 @@ body.theme-pink .decor-card{
 }
 
 /* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery{
+    background:var(--black);
+}
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.gallery-item{
+    height:250px;
+    overflow:hidden;
+    border:1px solid var(--border-color);
+    position:relative;
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.08);
+}
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.faq{
+    background:var(--dark);
+}
+
+.faq-list{
+    max-width:800px;
+    margin:auto;
+}
+
+.faq-item{
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    margin-bottom:15px;
+    padding:20px;
+    border-radius:5px;
+}
+
+.faq-question{
+    color:var(--gold);
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.faq-answer{
+    color:var(--gray);
+    font-size:15px;
+}
+
+/* =========================================================
    SPONSORS
 ========================================================= */
 
@@ -596,6 +753,37 @@ body.theme-pink .decor-card{
 .sponsor-card p{
     color:var(--gray);
     font-size:14px;
+}
+
+/* =========================================================
+   PRESS
+========================================================= */
+
+.press{
+    background:var(--dark);
+}
+
+.press-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.press-card{
+    background:var(--card-bg);
+    padding:30px;
+    border:1px solid var(--border-color);
+}
+
+.press-card h3{
+    color:var(--gold);
+    margin-bottom:10px;
+}
+
+.press-card p{
+    color:var(--gray);
+    font-size:14px;
+    margin-bottom:20px;
 }
 
 /* =========================================================
@@ -660,8 +848,8 @@ body.theme-pink .cta{
 
 <p><a href="#home" data-i18n="navHome">Accueil</a></p>
 <p><a href="#about" data-i18n="navAbout">Concept</a></p>
-<p><a href="#format" data-i18n="navFormat">Format</a></p>
 <p><a href="#candidates" data-i18n="navCandidates">Candidates</a></p>
+<p><a href="#gallery" data-i18n="navGallery">Galerie</a></p>
 <p><a href="#sponsors" data-i18n="navSponsors">Sponsors</a></p>
 
 </div>
@@ -797,7 +985,9 @@ html[dir="rtl"] .section-title p{
         display:block;
     }
 
-    .about-grid{
+    .about-grid,
+    .jury-grid,
+    .press-grid{
         grid-template-columns:1fr;
     }
 
@@ -806,7 +996,8 @@ html[dir="rtl"] .section-title p{
     }
 
     .decor-grid,
-    .candidates-grid{
+    .candidates-grid,
+    .gallery-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
@@ -837,7 +1028,8 @@ html[dir="rtl"] .section-title p{
     .format-grid,
     .features,
     .decor-grid,
-    .candidates-grid{
+    .candidates-grid,
+    .gallery-grid{
         grid-template-columns:1fr;
     }
 
@@ -887,11 +1079,14 @@ html[dir="rtl"] .section-title p{
 <nav id="nav">
 
 <a href="#home" data-i18n="navHome">Accueil</a>
+<a href="#trailer" data-i18n="navTrailer">Teaser</a>
 <a href="#about" data-i18n="navAbout">Concept</a>
-<a href="#format" data-i18n="navFormat">Format</a>
-<a href="#decor" data-i18n="navDecor">Décor</a>
+<a href="#jury" data-i18n="navJury">Jury</a>
 <a href="#candidates" data-i18n="navCandidates">Candidates</a>
+<a href="#gallery" data-i18n="navGallery">Galerie</a>
+<a href="#faq" data-i18n="navFaq">FAQ</a>
 <a href="#sponsors" data-i18n="navSponsors">Sponsors</a>
+<a href="#press" data-i18n="navPress">Presse</a>
 <a href="#contact" data-i18n="navContact">Contact</a>
 
 <div class="controls-container">
@@ -933,14 +1128,37 @@ html[dir="rtl"] .section-title p{
 
 <div class="buttons">
 
-<a href="#about" class="btn btn-gold" data-i18n="discover">
-    Découvrir le programme
+<a href="#trailer" class="btn btn-gold" data-i18n="discover">
+    Voir le Teaser
 </a>
 
 <a href="#sponsors" class="btn btn-outline" data-i18n="beSponsor">
     Devenir partenaire
 </a>
 
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     TRAILER / VIDEO SECTION
+===================================================== -->
+
+<section class="trailer" id="trailer">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="trailerSmall">Bande Annonce</small>
+<h2 data-i18n="trailerTitle">Découvrez le Teaser Officiel</h2>
+</div>
+
+<div class="video-container">
+<div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Teaser" allowfullscreen></iframe>
+</div>
 </div>
 
 </div>
@@ -1042,6 +1260,61 @@ html[dir="rtl"] .section-title p{
 
 
 <!-- =====================================================
+     JURY & EXPERTS
+===================================================== -->
+
+<section class="jury" id="jury">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="jurySmall">Les Experts</small>
+<h2 data-i18n="juryTitle">Le Jury & Les Coachs</h2>
+<p data-i18n="juryIntro">Des professionnels reconnus pour accompagner et guider les candidates tout au long de l'aventure.</p>
+</div>
+
+<div class="jury-grid">
+
+<div class="jury-card">
+<div class="jury-img">
+    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Marc Vane">
+</div>
+<div class="jury-info">
+    <h3>Marc Vane</h3>
+    <span data-i18n="j1Role">Directeur Artistique & Metteur en scène</span>
+    <p data-i18n="j1Desc">Expert en image et mise en valeur de la personnalité scénique.</p>
+</div>
+</div>
+
+<div class="jury-card">
+<div class="jury-img">
+    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Leila Dridi">
+</div>
+<div class="jury-info">
+    <h3>Leila Dridi</h3>
+    <span data-i18n="j2Role">Coach de vie & Relations publiques</span>
+    <p data-i18n="j2Desc">Spécialiste en communication et développement personnel.</p>
+</div>
+</div>
+
+<div class="jury-card">
+<div class="jury-img">
+    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Antoine de Saint-Loup">
+</div>
+<div class="jury-info">
+    <h3>Antoine de Saint-Loup</h3>
+    <span data-i18n="j3Role">Producteur & Critique de Mode</span>
+    <p data-i18n="j3Desc">Figure incontournable du stylisme et des tendances internationales.</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
      FORMAT
 ===================================================== -->
 
@@ -1090,63 +1363,33 @@ html[dir="rtl"] .section-title p{
 <div class="format-grid">
 
 <div class="format-card">
-
 <h3>01</h3>
-
-<p data-i18n="format1">
-    Billboard IN : 5 secondes
-</p>
-
+<p data-i18n="format1">Billboard IN : 5 secondes</p>
 </div>
 
 <div class="format-card">
-
 <h3>02</h3>
-
-<p data-i18n="format2">
-    Générique IN : 1 minute
-</p>
-
+<p data-i18n="format2">Générique IN : 1 minute</p>
 </div>
 
 <div class="format-card">
-
 <h3>03</h3>
-
-<p data-i18n="format3">
-    Billboard OUT : 5 secondes
-</p>
-
+<p data-i18n="format3">Billboard OUT : 5 secondes</p>
 </div>
 
 <div class="format-card">
-
 <h3>04</h3>
-
-<p data-i18n="format4">
-    Publicité : 5 minutes
-</p>
-
+<p data-i18n="format4">Publicité : 5 minutes</p>
 </div>
 
 <div class="format-card">
-
 <h3>05</h3>
-
-<p data-i18n="format5">
-    5 jingles de 3 secondes
-</p>
-
+<p data-i18n="format5">5 jingles de 3 secondes</p>
 </div>
 
 <div class="format-card">
-
 <h3>06</h3>
-
-<p data-i18n="format6">
-    Générique OUT : 1 minute 30 secondes
-</p>
-
+<p data-i18n="format6">Générique OUT : 1 minute 30 secondes</p>
 </div>
 
 </div>
@@ -1179,83 +1422,33 @@ html[dir="rtl"] .section-title p{
 <div class="features">
 
 <div class="feature">
-
 <div class="feature-number">01</div>
-
-<h3 data-i18n="feature1Title">
-    Présélection
-</h3>
-
-<p data-i18n="feature1Text">
-    Une présélection des candidates basée sur leurs profils
-    psychologiques et physiques afin de garantir un casting
-    cohérent et captivant.
-</p>
-
+<h3 data-i18n="feature1Title">Présélection</h3>
+<p data-i18n="feature1Text">Une présélection des candidates basée sur leurs profils psychologiques et physiques afin de garantir un casting cohérent et captivant.</p>
 </div>
 
-
 <div class="feature">
-
 <div class="feature-number">02</div>
-
-<h3 data-i18n="feature2Title">
-    Célébrités & professionnels
-</h3>
-
-<p data-i18n="feature2Text">
-    Une célébrité est invitée régulièrement afin d’apporter
-    des conseils pertinents et une dynamique nouvelle.
-</p>
-
+<h3 data-i18n="feature2Title">Célébrités & professionnels</h3>
+<p data-i18n="feature2Text">Une célébrité est invitée régulièrement afin d’apporter des conseils pertinents et une dynamique nouvelle.</p>
 </div>
 
-
 <div class="feature">
-
 <div class="feature-number">03</div>
-
-<h3 data-i18n="feature3Title">
-    Élimination
-</h3>
-
-<p data-i18n="feature3Text">
-    Un système d’élimination basé sur les appréciations du jury,
-    les notes attribuées et le vote des téléspectateurs.
-</p>
-
+<h3 data-i18n="feature3Title">Élimination</h3>
+<p data-i18n="feature3Text">Un système d’élimination basé sur les appréciations du jury, les notes attribuées et le vote des téléspectateurs.</p>
 </div>
 
-
 <div class="feature">
-
 <div class="feature-number">04</div>
-
-<h3 data-i18n="feature4Title">
-    Défis & missions
-</h3>
-
-<p data-i18n="feature4Text">
-    Des missions et tâches destinées à maintenir une activité
-    télégénique constante et à développer la créativité.
-</p>
-
+<h3 data-i18n="feature4Title">Défis & missions</h3>
+<p data-i18n="feature4Text">Des missions et tâches destinées à maintenir une activité télégénique constante et à développer la créativité.</p>
 </div>
 
-
 <div class="feature">
-
 <div class="feature-number">05</div>
-
-<h3 data-i18n="feature5Title">
-    Le confessionnal
-</h3>
-
-<p data-i18n="feature5Text">
-    Un espace individuel permettant aux candidates d’exprimer
-    leurs pensées, émotions et relations au sein du groupe.
-</p>
-
+<h3 data-i18n="feature5Title">Le confessionnal</h3>
+<p data-i18n="feature5Text">Un espace individuel permettant aux candidates d’exprimer leurs pensées, émotions et relations au sein du groupe.</p>
 </div>
 
 </div>
@@ -1293,58 +1486,23 @@ html[dir="rtl"] .section-title p{
 <div class="decor-grid">
 
 <div class="decor-card">
-
-<h3 data-i18n="villaTitle">
-    Villa élégante
-</h3>
-
-<p data-i18n="villaText">
-    Grand salon, cuisine ouverte et chambres à thème,
-    lieu des discussions, complicités et tensions.
-</p>
-
+<h3 data-i18n="villaTitle">Villa élégante</h3>
+<p data-i18n="villaText">Grand salon, cuisine ouverte et chambres à thème, lieu des discussions, complicités et tensions.</p>
 </div>
 
-
 <div class="decor-card">
-
-<h3 data-i18n="gymTitle">
-    Salle de sport
-</h3>
-
-<p data-i18n="gymText">
-    Équipements modernes, espace yoga et mur miroir,
-    dédiés au bien-être et au dépassement de soi.
-</p>
-
+<h3 data-i18n="gymTitle">Salle de sport</h3>
+<p data-i18n="gymText">Équipements modernes, espace yoga et mur miroir, dédiés au bien-être et au dépassement de soi.</p>
 </div>
 
-
 <div class="decor-card">
-
-<h3 data-i18n="marketTitle">
-    Hypermarché
-</h3>
-
-<p data-i18n="marketText">
-    Un véritable espace de course pour les défis de gestion,
-    rapidité et créativité culinaire.
-</p>
-
+<h3 data-i18n="marketTitle">Hypermarché</h3>
+<p data-i18n="marketText">Un véritable espace de course pour les défis de gestion, rapidité et créativité culinaire.</p>
 </div>
 
-
 <div class="decor-card">
-
-<h3 data-i18n="streetTitle">
-    Rue commerçante
-</h3>
-
-<p data-i18n="streetText">
-    Boutiques de mode, beauté et décoration pour tester
-    le goût, le style et l’intelligence pratique.
-</p>
-
+<h3 data-i18n="streetTitle">Rue commerçante</h3>
+<p data-i18n="streetText">Boutiques de mode, beauté et décoration pour tester le goût, le style et l’intelligence pratique.</p>
 </div>
 
 </div>
@@ -1369,7 +1527,6 @@ html[dir="rtl"] .section-title p{
 
 <div class="candidates-grid">
 
-<!-- Candidate 1 -->
 <div class="candidate-card">
 <div class="candidate-img">
     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Inès Benali">
@@ -1384,7 +1541,6 @@ html[dir="rtl"] .section-title p{
 </div>
 </div>
 
-<!-- Candidate 2 -->
 <div class="candidate-card">
 <div class="candidate-img">
     <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Sarah Kettani">
@@ -1399,7 +1555,6 @@ html[dir="rtl"] .section-title p{
 </div>
 </div>
 
-<!-- Candidate 3 -->
 <div class="candidate-card">
 <div class="candidate-img">
     <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" alt="Lina Mansour">
@@ -1412,6 +1567,66 @@ html[dir="rtl"] .section-title p{
         <span data-i18n="voteText">Voter</span> (<span id="votes-c3">1450</span>)
     </button>
 </div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     GALLERY / BEHIND THE SCENES
+===================================================== -->
+
+<section class="gallery" id="gallery">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="gallerySmall">Immersion</small>
+<h2 data-i18n="galleryTitle">Galerie & Coulisses</h2>
+<p data-i18n="galleryIntro">Un aperçu exclusif des tournages et des moments forts en coulisses.</p>
+</div>
+
+<div class="gallery-grid">
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt="Photo 1"></div>
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=600&q=80" alt="Photo 2"></div>
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=600&q=80" alt="Photo 3"></div>
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     FAQ SECTION
+===================================================== -->
+
+<section class="faq" id="faq">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="faqSmall">Aide</small>
+<h2 data-i18n="faqTitle">Questions Fréquentes</h2>
+</div>
+
+<div class="faq-list">
+
+<div class="faq-item">
+<div class="faq-question" data-i18n="faq1Q">Comment participer aux castings des saisons futures ?</div>
+<div class="faq-answer" data-i18n="faq1A">Vous pouvez soumettre votre candidature directement via notre formulaire de contact ou en envoyant votre book aux équipes de production.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question" data-i18n="faq2Q">Comment fonctionne le système de vote public ?</div>
+<div class="faq-answer" data-i18n="faq2A">Chaque utilisateur peut voter une seule fois par candidate depuis la section dédiée du site web.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question" data-i18n="faq3Q">Quels sont les avantages pour les sponsors partenaires ?</div>
+<div class="faq-answer" data-i18n="faq3A">Les partenaires bénéficient d'une visibilité TV complète (billboards, placement produit) et d'une présence forte sur nos plateformes digitales.</div>
 </div>
 
 </div>
@@ -1449,87 +1664,67 @@ html[dir="rtl"] .section-title p{
 <div class="sponsor-grid">
 
 <div class="sponsor-card">
+<h3 data-i18n="sponsor1Title">Visibilité TV</h3>
+<p data-i18n="sponsor1Text">Billboard IN/OUT à chaque épisode et prime, présence dans les promotions et spots avant, après et au milieu du programme.</p>
+</div>
 
-<h3 data-i18n="sponsor1Title">
-    Visibilité TV
-</h3>
+<div class="sponsor-card">
+<h3 data-i18n="sponsor2Title">Placement produit</h3>
+<p data-i18n="sponsor2Text">Possibilité de placement du produit lors des quotidiennes du programme.</p>
+</div>
 
-<p data-i18n="sponsor1Text">
-    Billboard IN/OUT à chaque épisode et prime,
-    présence dans les promotions et spots avant,
-    après et au milieu du programme.
-</p>
+<div class="sponsor-card">
+<h3 data-i18n="sponsor3Title">Réseaux sociaux</h3>
+<p data-i18n="sponsor3Text">Présence de la marque sur les réseaux sociaux du programme, notamment Instagram et Facebook.</p>
+</div>
+
+<div class="sponsor-card">
+<h3 data-i18n="sponsor4Title">Branding candidates</h3>
+<p data-i18n="sponsor4Text">Logo présent sur les T-shirts portés par les candidates.</p>
+</div>
+
+<div class="sponsor-card">
+<h3 data-i18n="sponsor5Title">Soirée de couronnement</h3>
+<p data-i18n="sponsor5Text">Présence du sponsor sur les supports de communication de la soirée : magazine, journal, page Facebook et affiches.</p>
+</div>
+
+<div class="sponsor-card">
+<h3 data-i18n="sponsor6Title">Expérience partenaire</h3>
+<p data-i18n="sponsor6Text">Citation et remerciements du sponsor par l’animatrice lors de chaque prime, ainsi que possibilités de visibilité et shooting professionnel.</p>
+</div>
 
 </div>
 
+</div>
+</section>
 
-<div class="sponsor-card">
 
-<h3 data-i18n="sponsor2Title">
-    Placement produit
-</h3>
+<!-- =====================================================
+     PRESS ROOM
+===================================================== -->
 
-<p data-i18n="sponsor2Text">
-    Possibilité de placement du produit lors des
-    quotidiennes du programme.
-</p>
+<section class="press" id="press">
 
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="pressSmall">Médias</small>
+<h2 data-i18n="pressTitle">Espace Presse & Kit Média</h2>
+<p data-i18n="pressIntro">Téléchargez les communiqués officiels et les visuels en haute résolution.</p>
 </div>
 
+<div class="press-grid">
 
-<div class="sponsor-card">
-
-<h3 data-i18n="sponsor3Title">
-    Réseaux sociaux
-</h3>
-
-<p data-i18n="sponsor3Text">
-    Présence de la marque sur les réseaux sociaux
-    du programme, notamment Instagram et Facebook.
-</p>
-
+<div class="press-card">
+<h3 data-i18n="press1Title">Dossier de Presse Officiel</h3>
+<p data-i18n="press1Desc">Présentation complète du concept, de la grille et des profils des talents.</p>
+<a href="#" class="btn btn-outline" data-i18n="downloadBtn">Télécharger (PDF)</a>
 </div>
 
-
-<div class="sponsor-card">
-
-<h3 data-i18n="sponsor4Title">
-    Branding candidates
-</h3>
-
-<p data-i18n="sponsor4Text">
-    Logo présent sur les T-shirts portés par les candidates.
-</p>
-
-</div>
-
-
-<div class="sponsor-card">
-
-<h3 data-i18n="sponsor5Title">
-    Soirée de couronnement
-</h3>
-
-<p data-i18n="sponsor5Text">
-    Présence du sponsor sur les supports de communication
-    de la soirée : magazine, journal, page Facebook et affiches.
-</p>
-
-</div>
-
-
-<div class="sponsor-card">
-
-<h3 data-i18n="sponsor6Title">
-    Expérience partenaire
-</h3>
-
-<p data-i18n="sponsor6Text">
-    Citation et remerciements du sponsor par l’animatrice
-    lors de chaque prime, ainsi que possibilités de visibilité
-    et shooting professionnel.
-</p>
-
+<div class="press-card">
+<h3 data-i18n="press2Title">Kit Logo & Visuels HD</h3>
+<p data-i18n="press2Desc">Logotypes officiels, bannières et photos de presse libres de droits.</p>
+<a href="#" class="btn btn-outline" data-i18n="downloadBtn">Télécharger (ZIP)</a>
 </div>
 
 </div>
@@ -1640,57 +1835,57 @@ const translations = {
 fr:{
 
 navHome:"Accueil",
+navTrailer:"Teaser",
 navAbout:"Concept",
-navFormat:"Format",
-navDecor:"Décor",
+navJury:"Jury",
 navCandidates:"Candidates",
+navGallery:"Galerie",
+navFaq:"FAQ",
 navSponsors:"Sponsors",
+navPress:"Presse",
 navContact:"Contact",
 themeBtn:"🌸 Rose",
 
 heroBadge:"Émission de téléréalité",
-
 heroTitle1:"Les Défis",
 heroTitle2:"d’une Princesse",
-
-heroDescription:
-"Une aventure humaine, un révélateur de talents et une plateforme pour les femmes ambitieuses d’aujourd’hui.",
-
-discover:"Découvrir le programme",
+heroDescription:"Une aventure humaine, un révélateur de talents et une plateforme pour les femmes ambitieuses d’aujourd’hui.",
+discover:"Voir le Teaser",
 beSponsor:"Devenir partenaire",
 
+trailerSmall:"Bande Annonce",
+trailerTitle:"Découvrez le Teaser Officiel",
+
 aboutSmall:"Le concept",
-
 aboutTitle:"Bien plus qu’un concours",
-
-aboutIntro:
-"Une nouvelle approche de la téléréalité qui place la personnalité, le talent et le développement professionnel au cœur de l’aventure.",
-
-aboutText1:
-"Les Défis d’une Princesse est une émission de téléréalité innovante qui ambitionne de couronner une nouvelle « Miss presque parfait », en s’affranchissant des standards classiques des concours de beauté internationaux.",
-
-aboutText2:
-"Bien plus qu’un concours de beauté, l’émission propose un véritable parcours d’accompagnement professionnel. Les participantes sont encouragées à poursuivre leurs aspirations dans les domaines de la comédie, de l’animation télévisée ou encore du mannequinat.",
-
-aboutText3:
-"Chaque candidate est invitée à affirmer sa personnalité, exprimer sa créativité et construire son identité professionnelle.",
+aboutIntro:"Une nouvelle approche de la téléréalité qui place la personnalité, le talent et le développement professionnel au cœur de l’aventure.",
+aboutText1:"Les Défis d’une Princesse est une émission de téléréalité innovante qui ambitionne de couronner une nouvelle « Miss presque parfait », en s’affranchissant des standards classiques des concours de beauté internationaux.",
+aboutText2:"Bien plus qu’un concours de beauté, l’émission propose un véritable parcours d’accompagnement professionnel. Les participantes sont encouragées à poursuivre leurs aspirations dans les domaines de la comédie, de l’animation télévisée ou encore du mannequinat.",
+aboutText3:"Chaque candidate est invitée à affirmer sa personnalité, exprimer sa créativité et construire son identité professionnelle.",
 
 evaluationTitle:"Évaluation multicritères",
-
 evaluation1:"Style vestimentaire et originalité",
 evaluation2:"Mode de vie, alimentation, bien-être et activité physique",
 evaluation3:"Comportement, charisme et aisance relationnelle",
 evaluation4:"Engagement et performance dans les défis",
 evaluation5:"Expertise du jury et vote du public",
 
+jurySmall:"Les Experts",
+juryTitle:"Le Jury & Les Coachs",
+juryIntro:"Des professionnels reconnus pour accompagner et guider les candidates tout au long de l'aventure.",
+j1Role:"Directeur Artistique & Metteur en scène",
+j1Desc:"Expert en image et mise en valeur de la personnalité scénique.",
+j2Role:"Coach de vie & Relations publiques",
+j2Desc:"Spécialiste en communication et développement personnel.",
+j3Role:"Producteur & Critique de Mode",
+j3Desc:"Figure incontournable du stylisme et des tendances internationales.",
+
 formatSmall:"Format TV",
 formatTitle:"Un format pensé pour la télévision",
-
 episodes:"Numéros",
 duration:"Durée",
 content:"Minutes de contenu",
 quality:"Full HD",
-
 format1:"Billboard IN : 5 secondes",
 format2:"Générique IN : 1 minute",
 format3:"Billboard OUT : 5 secondes",
@@ -1700,36 +1895,26 @@ format6:"Générique OUT : 1 minute 30 secondes",
 
 mechanismSmall:"Le mécanisme",
 mechanismTitle:"Cinq éléments au cœur de l’aventure",
-
 feature1Title:"Présélection",
 feature1Text:"Une présélection des candidates basée sur leurs profils psychologiques et physiques afin de garantir un casting cohérent et captivant.",
-
 feature2Title:"Célébrités & professionnels",
 feature2Text:"Une célébrité est invitée régulièrement afin d’apporter des conseils pertinents et une dynamique nouvelle.",
-
 feature3Title:"Élimination",
 feature3Text:"Un système d’élimination basé sur les appréciations du jury, les notes attribuées et le vote des téléspectateurs.",
-
 feature4Title:"Défis & missions",
 feature4Text:"Des missions et tâches destinées à maintenir une activité télégénique constante et à développer la créativité.",
-
 feature5Title:"Le confessionnal",
 feature5Text:"Un espace individuel permettant aux candidates d’exprimer leurs pensées, émotions et relations au sein du groupe.",
 
 decorSmall:"L’univers",
 decorTitle:"Un décor comme terrain de jeu",
-
 decorIntro:"Un décor fixe pensé comme un véritable microcosme du quotidien rêvé des candidates.",
-
 villaTitle:"Villa élégante",
 villaText:"Grand salon, cuisine ouverte et chambres à thème, lieu des discussions, complicités et tensions.",
-
 gymTitle:"Salle de sport",
 gymText:"Équipements modernes, espace yoga et mur miroir, dédiés au bien-être et au dépassement de soi.",
-
 marketTitle:"Hypermarché",
 marketText:"Un véritable espace de course pour les défis de gestion, rapidité et créativité culinaire.",
-
 streetTitle:"Rue commerçante",
 streetText:"Boutiques de mode, beauté et décoration pour tester le goût, le style et l’intelligence pratique.",
 
@@ -1744,37 +1929,49 @@ c2Desc:"Entrepreneure et passionnée d'art dramatique.",
 c3Age:"22 ans — Montréal",
 c3Desc:"Étudiante en journalisme et mannequin.",
 
+gallerySmall:"Immersion",
+galleryTitle:"Galerie & Coulisses",
+galleryIntro:"Un aperçu exclusif des tournages et des moments forts en coulisses.",
+
+faqSmall:"Aide",
+faqTitle:"Questions Fréquentes",
+faq1Q:"Comment participer aux castings des saisons futures ?",
+faq1A:"Vous pouvez soumettre votre candidature directement via notre formulaire de contact ou en envoyant votre book aux équipes de production.",
+faq2Q:"Comment fonctionne le système de vote public ?",
+faq2A:"Chaque utilisateur peut voter une seule fois par candidate depuis la section dédiée du site web.",
+faq3Q:"Quels sont les avantages pour les sponsors partenaires ?",
+faq3A:"Les partenaires bénéficient d'une visibilité TV complète (billboards, placement produit) et d'une présence forte sur nos plateformes digitales.",
+
 sponsorSmall:"Partenariat",
 sponsorTitle:"Une visibilité forte pour les marques",
-
 sponsorIntro:"Le programme propose plusieurs dispositifs de visibilité et d’intégration pour les sponsors et partenaires.",
-
 sponsor1Title:"Visibilité TV",
 sponsor1Text:"Billboard IN/OUT à chaque épisode et prime, présence dans les promotions et spots avant, après et au milieu du programme.",
-
 sponsor2Title:"Placement produit",
 sponsor2Text:"Possibilité de placement du produit lors des quotidiennes du programme.",
-
 sponsor3Title:"Réseaux sociaux",
 sponsor3Text:"Présence de la marque sur les réseaux sociaux du programme, notamment Instagram et Facebook.",
-
 sponsor4Title:"Branding candidates",
 sponsor4Text:"Logo présent sur les T-shirts portés par les candidates.",
-
 sponsor5Title:"Soirée de couronnement",
 sponsor5Text:"Présence du sponsor sur les supports de communication de la soirée : magazine, journal, page Facebook et affiches.",
-
 sponsor6Title:"Expérience partenaire",
 sponsor6Text:"Citation et remerciements du sponsor par l’animatrice lors de chaque prime, ainsi que possibilités de visibilité et shooting professionnel.",
 
+pressSmall:"Médias",
+pressTitle:"Espace Presse & Kit Média",
+pressIntro:"Téléchargez les communiqués officiels et les visuels en haute résolution.",
+press1Title:"Dossier de Presse Officiel",
+press1Desc:"Présentation complète du concept, de la grille et des profils des talents.",
+press2Title:"Kit Logo & Visuels HD",
+press2Desc:"Logotypes officiels, bannières et photos de presse libres de droits.",
+downloadBtn:"Télécharger",
+
 ctaTitle:"Rejoignez l’aventure",
-
 ctaText:"Vous êtes une marque, un média, un partenaire ou un professionnel intéressé par le projet ? Contactez la production.",
-
 contactButton:"Contacter la production",
 
 footerDescription:"Une émission de téléréalité innovante, aventure humaine et révélateur de talents.",
-
 footerNavigation:"Navigation",
 footerProject:"Projet",
 footerFormat:"Format : 30 numéros",
@@ -1786,57 +1983,57 @@ footerDuration:"Durée : 1 heure"
 ar:{
 
 navHome:"الرئيسية",
+navTrailer:"الإعلان",
 navAbout:"فكرة البرنامج",
-navFormat:"الفورما",
-navDecor:"الديكور",
+navJury:"لجنة التحكيم",
 navCandidates:"المشتركات",
+navGallery:"المعرض",
+navFaq:"الأسئلة",
 navSponsors:"الرعاة",
+navPress:"الصحافة",
 navContact:"اتصل بنا",
 themeBtn:"🌸 وردي",
 
 heroBadge:"برنامج تلفزيون الواقع",
-
 heroTitle1:"تحديات",
 heroTitle2:"أميرة",
-
-heroDescription:
-"مغامرة إنسانية، منصة لاكتشاف المواهب، وفرصة للنساء الطموحات لبناء مستقبلهن المهني.",
-
-discover:"اكتشف البرنامج",
+heroDescription:"مغامرة إنسانية، منصة لاكتشاف المواهب، وفرصة للنساء الطموحات لبناء مستقبلهن المهني.",
+discover:"شاهد الإعلان",
 beSponsor:"كن شريكاً",
 
+trailerSmall:"الإعلان الترويجي",
+trailerTitle:"تعرف على التويزر الرسمي للبرنامج",
+
 aboutSmall:"فكرة البرنامج",
-
 aboutTitle:"أكثر من مجرد مسابقة",
-
-aboutIntro:
-"مقاربة جديدة لبرامج تلفزيون الواقع تضع الشخصية والموهبة والتطور المهني في قلب المغامرة.",
-
-aboutText1:
-"تحديات أميرة هو برنامج تلفزيون واقع مبتكر يهدف إلى تتويج ملكة جديدة «Miss presque parfait»، بعيداً عن المعايير التقليدية لمسابقات الجمال الدولية.",
-
-aboutText2:
-"البرنامج يتجاوز مفهوم مسابقة الجمال ليقدم مساراً حقيقياً للمرافقة والتطوير المهني، حيث يتم تشجيع المشاركات على متابعة طموحاتهن في مجالات التمثيل والتنشيط التلفزيوني وعالم عرض الأزياء.",
-
-aboutText3:
-"تُدعى كل مشاركة إلى إبراز شخصيتها والتعبير عن إبداعها وبناء هويتها المهنية.",
+aboutIntro:"مقاربة جديدة لبرامج تلفزيون الواقع تضع الشخصية والموهبة والتطور المهني في قلب المغامرة.",
+aboutText1:"تحديات أميرة هو برنامج تلفزيون واقع مبتكر يهدف إلى تتويج ملكة جديدة «Miss presque parfait»، بعيداً عن المعايير التقليدية لمسابقات الجمال الدولية.",
+aboutText2:"البرنامج يتجاوز مفهوم مسابقة الجمال ليقدم مساراً حقيقياً للمرافقة والتطوير المهني، حيث يتم تشجيع المشاركات على متابعة طموحاتهن في مجالات التمثيل والتنشيط التلفزيوني وعالم عرض الأزياء.",
+aboutText3:"تُدعى كل مشاركة إلى إبراز شخصيتها والتعبير عن إبداعها وبناء هويتها المهنية.",
 
 evaluationTitle:"نظام تقييم متعدد المعايير",
-
 evaluation1:"الأناقة والتميز في اختيار الملابس",
 evaluation2:"نمط الحياة، التغذية، العافية والنشاط البدني",
 evaluation3:"السلوك، الكاريزما والقدرة على التواصل",
 evaluation4:"الالتزام والأداء في التحديات اليومية",
 evaluation5:"خبرة لجنة التحكيم وتصويت الجمهور",
 
+jurySmall:"الخبراء",
+juryTitle:"لجنة التحكيم والمدربون",
+juryIntro:"محترفون معتمدون لمرافقة وتوجيه المشتركات طوال فترة المغامرة.",
+j1Role:"مدير فني ومخرج مسرحي",
+j1Desc:"خبير في الصورة وإبراز الشخصية على المسرح.",
+j2Role:"مدربة حياة وعلاقات عامة",
+j2Desc:"متخصصة في التواصل والتطوير الشخصي.",
+j3Role:"منتج وناقد أزياء",
+j3Desc:"شخصية بارزة في عالم التصميم والموضة العالمية.",
+
 formatSmall:"الفورما التلفزيوني",
 formatTitle:"صيغة مصممة للتلفزيون",
-
 episodes:"حلقة / رقم",
 duration:"المدة",
 content:"دقيقة محتوى",
 quality:"Full HD",
-
 format1:"Billboard IN : 5 ثوانٍ",
 format2:"الشارة الافتتاحية : دقيقة واحدة",
 format3:"Billboard OUT : 5 ثوانٍ",
@@ -1846,36 +2043,26 @@ format6:"الشارة الختامية : دقيقة و30 ثانية",
 
 mechanismSmall:"آلية البرنامج",
 mechanismTitle:"خمسة عناصر في قلب المغامرة",
-
 feature1Title:"الاختيار الأولي",
 feature1Text:"اختيار المشاركات اعتماداً على ملفاتهن النفسية والجسدية لضمان اختيار متناسق وجذاب.",
-
 feature2Title:"مشاهير ومحترفون",
 feature2Text:"استضافة شخصية مشهورة بشكل منتظم لتقديم النصائح وإضفاء ديناميكية جديدة على البرنامج.",
-
 feature3Title:"الإقصاء",
 feature3Text:"نظام إقصاء يعتمد على تقييم لجنة التحكيم والنقاط الممنوحة وتصويت المشاهدين.",
-
 feature4Title:"التحديات والمهام",
 feature4Text:"مهام وتحديات مستمرة للحفاظ على إيقاع تلفزيوني جذاب وتشجيع الإبداع.",
-
 feature5Title:"غرفة الاعتراف",
 feature5Text:"مساحة فردية تستطيع فيها المشاركات التعبير عن أفكارهن ومشاعرهن وعلاقاتهن داخل المجموعة.",
 
 decorSmall:"عالم البرنامج",
 decorTitle:"ديكور يتحول إلى ساحة للمغامرة",
-
 decorIntro:"ديكور ثابت مصمم ليكون صورة مصغرة للحياة اليومية التي تحلم بها المشاركات.",
-
 villaTitle:"فيلا أنيقة",
 villaText:"صالون كبير، مطبخ مفتوح وغرف ذات طابع مختلف، حيث تظهر النقاشات والصداقات والتوترات.",
-
 gymTitle:"قاعة رياضية",
 gymText:"معدات حديثة، مساحة يوغا وجدار مرايا، مخصصة للعافية وتطوير الذات.",
-
 marketTitle:"سوق تجاري كبير",
 marketText:"فضاء حقيقي للتسوق تُقام فيه تحديات الإدارة والسرعة والإبداع في الطبخ.",
-
 streetTitle:"شارع تجاري",
 streetText:"محلات للموضة والجمال والديكور لاختبار الذوق والأسلوب والذكاء العملي.",
 
@@ -1890,37 +2077,49 @@ c2Desc:"رائدة أعمال وشغوفة بالفن الدرامي.",
 c3Age:"22 سنة — مونتريال",
 c3Desc:"طالبة صحافة وعارضة أزياء.",
 
+gallerySmall:"الصور",
+galleryTitle:"معرض الصور والكواليس",
+galleryIntro:"نظرة حصرية على كواليس التصوير واللحظات المميزة خلف الكواليس.",
+
+faqSmall:"مساعدة",
+faqTitle:"الأسئلة الشائعة",
+faq1Q:"كيف يمكن المشاركة في تجارب الأداء للمواسم القادمة؟",
+faq1A:"يمكنك إرسال طلبك مباشرة عبر استمارة الاتصال أو عبر إرسال ملفك الشخصي لفريق الإنتاج.",
+faq2Q:"كيف يعمل نظام التصويت الجماهيري؟",
+faq2A:"يمكن لكل مستخدم التصويت مرة واحدة لكل مرشحة من خلال القسم المخصص في الموقع.",
+faq3Q:"ما هي مزايا الرعاية والشراكة؟",
+faq3A:"يحظى الشركاء بظهور تلفزيوني متكامل وإدماج تجاري وحضور قوي عبر منصاتنا الرقمية.",
+
 sponsorSmall:"الشراكة",
 sponsorTitle:"ظهور قوي للعلامات التجارية",
-
 sponsorIntro:"يوفر البرنامج مجموعة من فرص الظهور والدمج التجاري للرعاة والشركاء.",
-
 sponsor1Title:"الظهور التلفزيوني",
-sponsor1Text:"Billboard قبل وبعد كل حلقة وPrime، بالإضافة إلى الظهور في العروض الترويجية والإعلانات قبل وبعد ووسط البرنامج.",
-
+sponsor1Text:"Billboard قبل وبعد كل حلقة وPrime، بالإضافة إلى الظهور في العروض الترويجية والإعلانات.",
 sponsor2Title:"دمج المنتج",
 sponsor2Text:"إمكانية إدماج المنتج داخل الحلقات اليومية للبرنامج.",
-
 sponsor3Title:"شبكات التواصل",
 sponsor3Text:"ظهور العلامة التجارية على شبكات البرنامج الاجتماعية، خصوصاً Instagram وFacebook.",
-
 sponsor4Title:"علامة الراعي على ملابس المشاركات",
 sponsor4Text:"إظهار شعار العلامة التجارية على القمصان التي ترتديها المشاركات.",
-
 sponsor5Title:"سهرة التتويج",
-sponsor5Text:"حضور الراعي على مختلف وسائل الاتصال الخاصة بسهرة التتويج، مثل المجلات والصحف وصفحة Facebook والملصقات.",
-
+sponsor5Text:"حضور الراعي على مختلف وسائل الاتصال الخاصة بسهرة التتويج.",
 sponsor6Title:"تجربة الشريك",
-sponsor6Text:"ذكر وشكر الراعي من طرف المقدمة خلال كل Prime، إضافة إلى فرص الظهور والتصوير الاحترافي.",
+sponsor6Text:"ذكر وشكر الراعي من طرف المقدمة خلال كل Prime، إضافة إلى فرص التصوير الاحترافي.",
+
+pressSmall:"الإعلام",
+pressTitle:"المركز الصحفي وحزمة الوسائط",
+pressIntro:"قم بتحميل البيانات الرسمية والمواد المرئية بدقة عالية.",
+press1Title:"الملف الصحفي الرسمي",
+press1Desc:"عرض شامل لفكرة البرنامج، الشبكة البرمجية وملفات المواهب.",
+press2Title:"حزمة الشعار والرسومات عالية الدقة",
+press2Desc:"الشعارات الرسمية واللافتات وصور الصحافة الخالية من حقوق الملكية.",
+downloadBtn:"تحميل الملف",
 
 ctaTitle:"انضم إلى المغامرة",
-
 ctaText:"هل أنت علامة تجارية أو وسيلة إعلام أو شريك أو محترف مهتم بالمشروع؟ تواصل مع الإنتاج.",
-
 contactButton:"اتصل بالإنتاج",
 
 footerDescription:"برنامج تلفزيون واقع مبتكر، مغامرة إنسانية ومنصة لاكتشاف المواهب.",
-
 footerNavigation:"التنقل",
 footerProject:"المشروع",
 footerFormat:"الفورما: 30 حلقة",
@@ -1932,57 +2131,57 @@ footerDuration:"المدة: ساعة واحدة"
 en:{
 
 navHome:"Home",
+navTrailer:"Teaser",
 navAbout:"Concept",
-navFormat:"Format",
-navDecor:"Set Design",
+navJury:"Jury",
 navCandidates:"Candidates",
+navGallery:"Gallery",
+navFaq:"FAQ",
 navSponsors:"Sponsors",
+navPress:"Press",
 navContact:"Contact",
 themeBtn:"🌸 Pink",
 
 heroBadge:"Reality TV Show",
-
 heroTitle1:"The Challenges",
 heroTitle2:"of a Princess",
-
-heroDescription:
-"A human adventure, a talent reveal and a platform for ambitious women of today.",
-
-discover:"Discover the show",
+heroDescription:"A human adventure, a talent reveal and a platform for ambitious women of today.",
+discover:"Watch Teaser",
 beSponsor:"Become a partner",
 
+trailerSmall:"Trailer",
+trailerTitle:"Discover the Official Teaser",
+
 aboutSmall:"The concept",
-
 aboutTitle:"More than a beauty contest",
-
-aboutIntro:
-"A new approach to reality television placing personality, talent and professional development at the heart of the adventure.",
-
-aboutText1:
-"The Challenges of a Princess is an innovative reality TV show aiming to crown a new «Miss presque parfait», moving beyond the traditional standards of international beauty contests.",
-
-aboutText2:
-"More than a beauty contest, the show offers a genuine professional development journey. Participants are encouraged to pursue their ambitions in acting, television presenting and modelling.",
-
-aboutText3:
-"Each candidate is invited to express her personality, creativity and build her professional identity.",
+aboutIntro:"A new approach to reality television placing personality, talent and professional development at the heart of the adventure.",
+aboutText1:"The Challenges of a Princess is an innovative reality TV show aiming to crown a new «Miss presque parfait», moving beyond the traditional standards of international beauty contests.",
+aboutText2:"More than a beauty contest, the show offers a genuine professional development journey. Participants are encouraged to pursue their ambitions in acting, television presenting and modelling.",
+aboutText3:"Each candidate is invited to express her personality, creativity and build her professional identity.",
 
 evaluationTitle:"Multi-criteria evaluation",
-
 evaluation1:"Fashion style and originality",
 evaluation2:"Lifestyle, nutrition, wellness and physical activity",
 evaluation3:"Behaviour, charisma and communication skills",
 evaluation4:"Commitment and performance in daily challenges",
 evaluation5:"Jury expertise and audience voting",
 
+jurySmall:"The Experts",
+juryTitle:"Jury & Coaches",
+juryIntro:"Recognized professionals to guide and support candidates throughout the adventure.",
+j1Role:"Artistic Director & Stage Manager",
+j1Desc:"Expert in image enhancement and stage personality.",
+j2Role:"Life Coach & PR Specialist",
+j2Desc:"Specialist in communication and personal development.",
+j3Role:"Producer & Fashion Critic",
+j3Desc:"Key figure in fashion styling and international trends.",
+
 formatSmall:"TV Format",
 formatTitle:"A format designed for television",
-
 episodes:"Episodes",
 duration:"Duration",
 content:"Minutes of content",
 quality:"Full HD",
-
 format1:"Billboard IN: 5 seconds",
 format2:"Opening credits: 1 minute",
 format3:"Billboard OUT: 5 seconds",
@@ -1992,36 +2191,26 @@ format6:"Closing credits: 1 minute 30 seconds",
 
 mechanismSmall:"The mechanism",
 mechanismTitle:"Five elements at the heart of the adventure",
-
 feature1Title:"Pre-selection",
 feature1Text:"Candidates are pre-selected according to psychological and physical profiles to ensure a coherent and engaging casting.",
-
 feature2Title:"Celebrities & professionals",
 feature2Text:"A celebrity regularly joins the candidates to provide advice and introduce a new dynamic.",
-
 feature3Title:"Elimination",
 feature3Text:"An elimination system based on jury evaluations, scores and audience voting.",
-
 feature4Title:"Challenges & missions",
 feature4Text:"Missions and tasks designed to maintain a constant television rhythm and encourage creativity.",
-
 feature5Title:"The Confessional",
 feature5Text:"A private space where candidates can express their thoughts, emotions and relationships within the group.",
 
 decorSmall:"The universe",
 decorTitle:"A set designed as a playground",
-
 decorIntro:"A fixed set designed as a true microcosm of the lifestyle dreamed of by the candidates.",
-
 villaTitle:"Elegant Villa",
 villaText:"A large living room, open kitchen and themed bedrooms where conversations, friendships and tensions unfold.",
-
 gymTitle:"Design Gym",
 gymText:"Modern equipment, yoga space and mirror wall dedicated to wellness and self-improvement.",
-
 marketTitle:"Full-scale Hypermarket",
 marketText:"A real shopping environment for challenges involving management, speed and culinary creativity.",
-
 streetTitle:"Stylized Shopping Street",
 streetText:"Fashion, beauty and decoration boutiques designed to test taste, style and practical intelligence.",
 
@@ -2036,37 +2225,49 @@ c2Desc:"Entrepreneur and passionate about drama.",
 c3Age:"22 yrs — Montreal",
 c3Desc:"Journalism student and model.",
 
+gallerySmall:"Immersion",
+galleryTitle:"Gallery & Behind the Scenes",
+galleryIntro:"An exclusive look at the shoots and highlights behind the scenes.",
+
+faqSmall:"Support",
+faqTitle:"Frequently Asked Questions",
+faq1Q:"How to participate in future casting seasons?",
+faq1A:"You can submit your application directly via our contact form or send your portfolio to the production team.",
+faq2Q:"How does the public voting system work?",
+faq2A:"Each user can vote once per candidate from the dedicated section of the website.",
+faq3Q:"What are the benefits for partner sponsors?",
+faq3A:"Partners benefit from complete TV visibility, product placement, and strong digital exposure.",
+
 sponsorSmall:"Partnership",
 sponsorTitle:"Strong brand visibility",
-
 sponsorIntro:"The show offers multiple visibility and brand integration opportunities for sponsors and partners.",
-
 sponsor1Title:"TV Visibility",
 sponsor1Text:"IN/OUT billboards for every episode and prime, promotional exposure and spots before, after and during the programme.",
-
 sponsor2Title:"Product Placement",
 sponsor2Text:"Product placement opportunities within the daily episodes.",
-
 sponsor3Title:"Social Media",
 sponsor3Text:"Brand presence across the show's social media platforms, including Instagram and Facebook.",
-
 sponsor4Title:"Candidate Branding",
 sponsor4Text:"Brand logo displayed on T-shirts worn by the candidates.",
-
 sponsor5Title:"Crowning Ceremony",
-sponsor5Text:"Sponsor presence across communication materials for the crowning ceremony, including magazines, newspapers, Facebook page and posters.",
-
+sponsor5Text:"Sponsor presence across communication materials for the crowning ceremony.",
 sponsor6Title:"Partner Experience",
-sponsor6Text:"Sponsor mentions and acknowledgements by the presenter during each prime, as well as visibility opportunities and professional shooting.",
+sponsor6Text:"Sponsor mentions and acknowledgements by the presenter during each prime.",
+
+pressSmall:"Media",
+pressTitle:"Press Room & Media Kit",
+pressIntro:"Download official press releases and high-resolution visuals.",
+press1Title:"Official Press Kit",
+press1Desc:"Comprehensive presentation of the concept, grid and talent profiles.",
+press2Title:"Logo & HD Visuals Kit",
+press2Desc:"Official logotypes, banners and royalty-free press photos.",
+downloadBtn:"Download",
 
 ctaTitle:"Join the adventure",
-
 ctaText:"Are you a brand, media outlet, partner or professional interested in the project? Contact the production team.",
-
 contactButton:"Contact Production",
 
 footerDescription:"An innovative reality TV show, a human adventure and a platform for discovering talent.",
-
 footerNavigation:"Navigation",
 footerProject:"Project",
 footerFormat:"Format: 30 episodes",
@@ -2113,7 +2314,6 @@ function changeLanguage(lang){
 
     localStorage.setItem("preferredLanguage", lang);
     
-    // Update theme button text according to active language and theme
     const isPink = document.body.classList.contains("theme-pink");
     const themeBtn = document.getElementById("themeToggleBtn");
     if(isPink){
@@ -2134,13 +2334,11 @@ function changeLanguage(lang){
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-    // Load Theme
     const savedTheme = localStorage.getItem("preferredTheme");
     if(savedTheme === "pink"){
         document.body.classList.add("theme-pink");
     }
 
-    // Load Language
     const savedLanguage = localStorage.getItem("preferredLanguage") || "fr";
     document.getElementById("language").value = savedLanguage;
     changeLanguage(savedLanguage);
