@@ -655,11 +655,110 @@ body.theme-pink .decor-card{
 }
 
 /* =========================================================
+   DÉFIS INTERACTIFS (NEW SECTION)
+========================================================= */
+
+.interactive-challenges{
+    background:var(--black);
+}
+
+.challenges-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:25px;
+    margin-bottom:50px;
+}
+
+.challenge-card{
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    padding:30px;
+    position:relative;
+    transition:.3s;
+}
+
+.challenge-card:hover{
+    border-color:var(--gold);
+    transform:translateY(-5px);
+}
+
+.challenge-card h3{
+    color:var(--gold);
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.challenge-card p{
+    color:var(--gray);
+    font-size:15px;
+    margin-bottom:15px;
+}
+
+.sponsor-tag{
+    display:inline-block;
+    background:var(--dark2);
+    color:var(--gold-light);
+    border:1px solid var(--border-color);
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    margin-bottom:20px;
+}
+
+.challenge-form-box{
+    background:var(--dark);
+    border:1px solid var(--border-color);
+    padding:40px;
+    max-width:800px;
+    margin:0 auto;
+}
+
+.challenge-form-box h3{
+    color:var(--gold);
+    font-size:24px;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.challenge-form-box p{
+    color:var(--gray);
+    text-align:center;
+    margin-bottom:25px;
+    font-size:15px;
+}
+
+.challenge-form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.challenge-form input,
+.challenge-form select,
+.challenge-form textarea{
+    width:100%;
+    background:var(--dark2);
+    border:1px solid var(--border-color);
+    color:var(--white);
+    padding:12px 15px;
+    border-radius:5px;
+    font-family:inherit;
+    font-size:14px;
+}
+
+.challenge-form input:focus,
+.challenge-form select:focus,
+.challenge-form textarea:focus{
+    outline:none;
+    border-color:var(--gold);
+}
+
+/* =========================================================
    GALLERY
 ========================================================= */
 
 .gallery{
-    background:var(--black);
+    background:var(--dark);
 }
 
 .gallery-grid{
@@ -691,7 +790,7 @@ body.theme-pink .decor-card{
 ========================================================= */
 
 .faq{
-    background:var(--dark);
+    background:var(--black);
 }
 
 .faq-list{
@@ -724,7 +823,7 @@ body.theme-pink .decor-card{
 ========================================================= */
 
 .sponsors{
-    background:var(--black);
+    background:var(--dark);
 }
 
 .sponsor-intro{
@@ -760,7 +859,7 @@ body.theme-pink .decor-card{
 ========================================================= */
 
 .press{
-    background:var(--dark);
+    background:var(--black);
 }
 
 .press-grid{
@@ -849,6 +948,7 @@ body.theme-pink .cta{
 <p><a href="#home" data-i18n="navHome">Accueil</a></p>
 <p><a href="#about" data-i18n="navAbout">Concept</a></p>
 <p><a href="#candidates" data-i18n="navCandidates">Candidates</a></p>
+<p><a href="#challenges" data-i18n="navChallenges">Défis</a></p>
 <p><a href="#gallery" data-i18n="navGallery">Galerie</a></p>
 <p><a href="#sponsors" data-i18n="navSponsors">Sponsors</a></p>
 
@@ -987,7 +1087,8 @@ html[dir="rtl"] .section-title p{
 
     .about-grid,
     .jury-grid,
-    .press-grid{
+    .press-grid,
+    .challenges-grid{
         grid-template-columns:1fr;
     }
 
@@ -1029,7 +1130,8 @@ html[dir="rtl"] .section-title p{
     .features,
     .decor-grid,
     .candidates-grid,
-    .gallery-grid{
+    .gallery-grid,
+    .challenges-grid{
         grid-template-columns:1fr;
     }
 
@@ -1083,6 +1185,7 @@ html[dir="rtl"] .section-title p{
 <a href="#about" data-i18n="navAbout">Concept</a>
 <a href="#jury" data-i18n="navJury">Jury</a>
 <a href="#candidates" data-i18n="navCandidates">Candidates</a>
+<a href="#challenges" data-i18n="navChallenges">Défis</a>
 <a href="#gallery" data-i18n="navGallery">Galerie</a>
 <a href="#faq" data-i18n="navFaq">FAQ</a>
 <a href="#sponsors" data-i18n="navSponsors">Sponsors</a>
@@ -1576,6 +1679,71 @@ html[dir="rtl"] .section-title p{
 
 
 <!-- =====================================================
+     DÉFIS INTERACTIFS (NEW SECTION)
+===================================================== -->
+
+<section class="interactive-challenges" id="challenges">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="challengesSmall">Interaction</small>
+<h2 data-i18n="challengesTitle">Les Défis du Public & Partenaires</h2>
+<p data-i18n="challengesIntro">Participez à nos défis interactifs inspirés de l'émission, intégrez les produits de nos partenaires et tentez de remporter des prix exclusifs.</p>
+</div>
+
+<div class="challenges-grid">
+
+<div class="challenge-card">
+<span class="sponsor-tag" data-i18n="sponsorTag1">Partenaire: EWOPTIC</span>
+<h3 data-i18n="ch1Title">Le Défi Style</h3>
+<p data-i18n="ch1Desc">Coordonnez une tenue quotidienne ou de soirée inspirée de l'émission en mettant en valeur les lunettes ou accessoires de notre partenaire.</p>
+</div>
+
+<div class="challenge-card">
+<span class="sponsor-tag" data-i18n="sponsorTag2">Partenaire: Bien-être & Nutrition</span>
+<h3 data-i18n="ch2Title">Le Défi Mode de Vie</h3>
+<p data-i18n="ch2Desc">Partagez votre routine sportive ou de bien-être quotidienne en intégrant les produits de nos partenaires associés.</p>
+</div>
+
+<div class="challenge-card">
+<span class="sponsor-tag" data-i18n="sponsorTag3">Partenaire: Production & Casting</span>
+<h3 data-i18n="ch3Title">Le Défi Comédie et Rôle</h3>
+<p data-i18n="ch3Desc">Enregistrez un court passage théâtral ou humoristique de 30 secondes en utilisant le produit du sponsor comme accessoire central.</p>
+</div>
+
+<div class="challenge-card">
+<span class="sponsor-tag" data-i18n="sponsorTag4">Partenaire: Le Jury Populaire</span>
+<h3 data-i18n="ch4Title">Le Jury Populaire & Quiz</h3>
+<p data-i18n="ch4Desc">Évaluez les performances des candidates et répondez aux questions de l'épisode pour gagner des packs cadeaux exclusifs.</p>
+</div>
+
+</div>
+
+<div class="challenge-form-box">
+<h3 data-i18n="formBoxTitle">Envoyez votre participation</h3>
+<p data-i18n="formBoxDesc">Remplissez le formulaire ci-dessous pour soumettre votre vidéo ou vos réponses au défi de la semaine.</p>
+
+<form class="challenge-form" onsubmit="submitChallenge(event)">
+    <input type="text" placeholder="Nom complet" data-i18n-placeholder="namePlaceholder" required>
+    <input type="email" placeholder="Adresse e-mail" data-i18n-placeholder="emailPlaceholder" required>
+    <select required>
+        <option value="" disabled selected data-i18n="selectChallenge">Choisissez un défi</option>
+        <option value="style" data-i18n="opt1">Le Défi Style</option>
+        <option value="lifestyle" data-i18n="opt2">Le Défi Mode de Vie</option>
+        <option value="comedy" data-i18n="opt3">Le Défi Comédie et Rôle</option>
+        <option value="jury" data-i18n="opt4">Le Jury Populaire & Quiz</option>
+    </select>
+    <textarea rows="4" placeholder="Lien de votre vidéo ou description de votre participation..." data-i18n-placeholder="descPlaceholder" required></textarea>
+    <button type="submit" class="btn btn-gold" data-i18n="submitBtn">Soumettre ma participation</button>
+</form>
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
      GALLERY / BEHIND THE SCENES
 ===================================================== -->
 
@@ -1827,6 +1995,17 @@ function voteFor(candidateId, btnElement) {
 
 
 /* =========================================================
+   CHALLENGE SUBMISSION FUNCTION
+========================================================= */
+
+function submitChallenge(event){
+    event.preventDefault();
+    alert("Votre participation au défi a bien été envoyée avec succès ! Merci de votre interaction.");
+    event.target.reset();
+}
+
+
+/* =========================================================
    TRANSLATIONS
 ========================================================= */
 
@@ -1839,6 +2018,7 @@ navTrailer:"Teaser",
 navAbout:"Concept",
 navJury:"Jury",
 navCandidates:"Candidates",
+navChallenges:"Défis",
 navGallery:"Galerie",
 navFaq:"FAQ",
 navSponsors:"Sponsors",
@@ -1929,6 +2109,33 @@ c2Desc:"Entrepreneure et passionnée d'art dramatique.",
 c3Age:"22 ans — Montréal",
 c3Desc:"Étudiante en journalisme et mannequin.",
 
+challengesSmall:"Interaction",
+challengesTitle:"Les Défis du Public & Partenaires",
+challengesIntro:"Participez à nos défis interactifs inspirés de l'émission, intégrez les produits de nos partenaires et tentez de remporter des prix exclusifs.",
+sponsorTag1:"Partenaire: EWOPTIC",
+ch1Title:"Le Défi Style",
+ch1Desc:"Coordonnez une tenue quotidienne ou de soirée inspirée de l'émission en mettant en valeur les lunettes ou accessoires de notre partenaire.",
+sponsorTag2:"Partenaire: Bien-être & Nutrition",
+ch2Title:"Le Défi Mode de Vie",
+ch2Desc:"Partagez votre routine sportive ou de bien-être quotidienne en intégrant les produits de nos partenaires associés.",
+sponsorTag3:"Partenaire: Production & Casting",
+ch3Title:"Le Défi Comédie et Rôle",
+ch3Desc:"Enregistrez un court passage théâtral ou humoristique de 30 secondes en utilisant le produit du sponsor comme accessoire central.",
+sponsorTag4:"Partenaire: Le Jury Populaire",
+ch4Title:"Le Jury Populaire & Quiz",
+ch4Desc:"Évaluez les performances des candidates et répondez aux questions de l'épisode pour gagner des packs cadeaux exclusifs.",
+formBoxTitle:"Envoyez votre participation",
+formBoxDesc:"Remplissez le formulaire ci-dessous pour soumettre votre vidéo ou vos réponses au défi de la semaine.",
+namePlaceholder:"Nom complet",
+emailPlaceholder:"Adresse e-mail",
+selectChallenge:"Choisissez un défi",
+opt1:"Le Défi Style",
+opt2:"Le Défi Mode de Vie",
+opt3:"Le Défi Comédie et Rôle",
+opt4:"Le Jury Populaire & Quiz",
+descPlaceholder:"Lien de votre vidéo ou description de votre participation...",
+submitBtn:"Soumettre ma participation",
+
 gallerySmall:"Immersion",
 galleryTitle:"Galerie & Coulisses",
 galleryIntro:"Un aperçu exclusif des tournages et des moments forts en coulisses.",
@@ -1987,6 +2194,7 @@ navTrailer:"الإعلان",
 navAbout:"فكرة البرنامج",
 navJury:"لجنة التحكيم",
 navCandidates:"المشتركات",
+navChallenges:"التحديات",
 navGallery:"المعرض",
 navFaq:"الأسئلة",
 navSponsors:"الرعاة",
@@ -2077,6 +2285,33 @@ c2Desc:"رائدة أعمال وشغوفة بالفن الدرامي.",
 c3Age:"22 سنة — مونتريال",
 c3Desc:"طالبة صحافة وعارضة أزياء.",
 
+challengesSmall:"التفاعل",
+challengesTitle:"تحديات الجمهور والشركاء",
+challengesIntro:"شارك في تحدياتنا التفاعلية المستوحاة من البرنامج، وأبرز منتجات شركائنا، واربح جوائز حصرية.",
+sponsorTag1:"الشريك: EWOPTIC",
+ch1Title:"تحدي الأناقة والموضة",
+ch1Desc:"قم بتنسيق إطلالة يومية أو سهرة مستوحاة من أجواء البرنامج، مع إبراز منتج الشريك بطريقة عصرية.",
+sponsorTag2:"الشريك: نمط الحياة الصحي",
+ch2Title:"تحدي نمط الحياة الصحي",
+ch2Desc:"شاركنا فيديو قصير يوثق روتينك الرياضي أو الصحي اليومي مع دمج منتجات الرعاة.",
+sponsorTag3:"الشريك: الأداء الفني والكوميدي",
+ch3Title:"تحدي الأداء الفني والكوميدي",
+ch3Desc:"قدم مقطعاً تمثيلياً قصيرًا لا يتجاوز 30 ثانية مستخدماً منتج الشريك كعنصر درامي إبداعي.",
+sponsorTag4:"الشريك: لجنة تحكيم الجمهور",
+ch4Title:"تحدي لجنة تحكيم الجمهور",
+ch4Desc:"قيم أداء المرشحات أو أجب عن أسئلة المسابقة التفاعلية المرتبطة بأحداث الحلقات.",
+formBoxTitle:"أرسل مشاركتك الآن",
+formBoxDesc:"املأ النموذج أدناه لإرسال مشاركتك في التحدي وتأكيد تفاعلك معنا.",
+namePlaceholder:"الاسم الكامل",
+emailPlaceholder:"البريد الإلكتروني",
+selectChallenge:"اختر التحدي المناسب",
+opt1:"تحدي الأناقة والموضة",
+opt2:"تحدي نمط الحياة الصحي",
+opt3:"تحدي الأداء الفني والكوميدي",
+opt4:"تحدي لجنة تحكيم الجمهور",
+descPlaceholder:"رابط الفيديو أو تفاصيل مشاركتك...",
+submitBtn:"إرسال المشاركة",
+
 gallerySmall:"الصور",
 galleryTitle:"معرض الصور والكواليس",
 galleryIntro:"نظرة حصرية على كواليس التصوير واللحظات المميزة خلف الكواليس.",
@@ -2135,6 +2370,7 @@ navTrailer:"Teaser",
 navAbout:"Concept",
 navJury:"Jury",
 navCandidates:"Candidates",
+navChallenges:"Challenges",
 navGallery:"Gallery",
 navFaq:"FAQ",
 navSponsors:"Sponsors",
@@ -2225,6 +2461,33 @@ c2Desc:"Entrepreneur and passionate about drama.",
 c3Age:"22 yrs — Montreal",
 c3Desc:"Journalism student and model.",
 
+challengesSmall:"Interaction",
+challengesTitle:"Public & Partner Challenges",
+challengesIntro:"Join our interactive challenges inspired by the show, feature our partners' products, and win exclusive prizes.",
+sponsorTag1:"Partner: EWOPTIC",
+ch1Title:"The Style Challenge",
+ch1Desc:"Coordinate a daily or evening look inspired by the show, highlighting our partner's products.",
+sponsorTag2:"Partner: Wellness & Nutrition",
+ch2Title:"The Lifestyle Challenge",
+ch2Desc:"Share your daily routine featuring our partners' wellness or sports products.",
+sponsorTag3:"Partner: Production & Casting",
+ch3Title:"The Comedy & Role Challenge",
+ch3Desc:"Record a short 30-second acting monologue using the partner's product as a creative props.",
+sponsorTag4:"Partner: People's Jury",
+ch4Title:"The People's Jury & Quiz",
+ch4Desc:"Evaluate candidate performances and answer interactive weekly episode trivia.",
+formBoxTitle:"Submit Your Entry",
+formBoxDesc:"Fill out the form below to submit your video or response for this week's challenge.",
+namePlaceholder:"Full Name",
+emailPlaceholder:"Email Address",
+selectChallenge:"Select a Challenge",
+opt1:"The Style Challenge",
+opt2:"The Lifestyle Challenge",
+opt3:"The Comedy & Role Challenge",
+opt4:"The People's Jury & Quiz",
+descPlaceholder:"Video link or participation description...",
+submitBtn:"Submit Participation",
+
 gallerySmall:"Immersion",
 galleryTitle:"Gallery & Behind the Scenes",
 galleryIntro:"An exclusive look at the shoots and highlights behind the scenes.",
@@ -2306,6 +2569,13 @@ function changeLanguage(lang){
                 element.textContent = data[key];
             }
 
+        });
+
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(element=>{
+            const key = element.getAttribute("data-i18n-placeholder");
+            if(data[key]){
+                element.placeholder = data[key];
+            }
         });
 
         document.body.classList.remove("fade");
