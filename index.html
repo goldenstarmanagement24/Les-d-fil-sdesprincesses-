@@ -1,923 +1,2627 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les Défis d'une Princesse</title>
-    <style>
-        :root {
-            --primary-gold: #d4af37;
-            --light-gold: #f3e5ab;
-            --dark-bg: #070707;
-            --card-bg: rgba(20, 20, 20, 0.85);
-            --text-white: #ffffff;
-            --text-gray: #b0b0b0;
-            --border-gold: rgba(212, 175, 55, 0.3);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-white);
-            overflow-x: hidden;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background: linear-gradient(to bottom, rgba(7,7,7,0.95), rgba(7,7,7,0.6));
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--primary-gold);
-            font-weight: bold;
-            font-size: 1rem;
-            letter-spacing: 1px;
-        }
-        
-        .logo span::before {
-            content: "👑 ";
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        nav ul li a {
-            color: var(--text-white);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--primary-gold);
-        }
-
-        .lang-switch {
-            display: flex;
-            gap: 2px;
-            border: 1px solid var(--primary-gold);
-            border-radius: 4px;
-            padding: 2px;
-            background: rgba(0,0,0,0.5);
-        }
-
-        .lang-switch button {
-            background: transparent;
-            border: none;
-            color: var(--text-white);
-            padding: 4px 10px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .lang-switch button.active, .lang-switch button:hover {
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-            border-radius: 2px;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(to top, rgba(7,7,7,1), rgba(7,7,7,0.3)), url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            position: relative;
-        }
-
-        .hero-badge {
-            color: var(--primary-gold);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-        }
-
-        .hero h1 {
-            color: var(--primary-gold);
-            font-size: 3.8rem;
-            margin-bottom: 15px;
-            font-family: serif;
-            letter-spacing: 2px;
-            font-weight: 400;
-        }
-
-        .hero p {
-            font-size: 1.05rem;
-            color: var(--text-gray);
-            max-width: 600px;
-            margin-bottom: 35px;
-            line-height: 1.6;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 20px;
-        }
-
-        .btn {
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-
-        .btn-primary {
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background: var(--light-gold);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--text-white);
-            border: 1px solid var(--primary-gold);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-        }
-
-        /* Generic Section Styling */
-        section {
-            padding: 80px 60px;
-            border-bottom: 1px solid var(--border-gold);
-        }
-
-        .section-subtitle {
-            color: var(--text-gray);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 8px;
-        }
-
-        .section-heading {
-            font-size: 2.2rem;
-            font-family: serif;
-            margin-bottom: 40px;
-            color: var(--text-white);
-            font-weight: 400;
-        }
-
-        /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .about-text-box p {
-            color: var(--text-gray);
-            line-height: 1.7;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-        }
-
-        .criteria-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-gold);
-            border-radius: 12px;
-            padding: 30px;
-        }
-
-        .criteria-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            color: var(--primary-gold);
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .criteria-list {
-            list-style: none;
-        }
-
-        .criteria-list li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            color: var(--text-gray);
-            line-height: 1.4;
-        }
-
-        .criteria-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--primary-gold);
-            font-size: 1.2rem;
-        }
-
-        .about-img img {
-            width: 100%;
-            border-radius: 12px;
-            object-fit: cover;
-            height: 350px;
-            border: 1px solid var(--border-gold);
-        }
-
-        /* TV Format Section */
-        .format-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .format-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            background: rgba(20,20,20,0.6);
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid var(--border-gold);
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            color: var(--primary-gold);
-            font-size: 1.6rem;
-            font-family: serif;
-        }
-
-        .stat-item span {
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .format-list {
-            background: var(--card-bg);
-            border: 1px solid var(--border-gold);
-            border-radius: 12px;
-            padding: 25px;
-        }
-
-        .format-list ol {
-            list-style: none;
-            counter-reset: item;
-        }
-
-        .format-list li {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.85rem;
-            color: var(--text-gray);
-        }
-
-        .format-list li:last-child {
-            border-bottom: none;
-        }
-
-        .format-list li span:first-child {
-            color: var(--primary-gold);
-            font-weight: bold;
-        }
-
-        .format-video-bg {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-gold);
-            height: 320px;
-        }
-
-        .format-video-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7);
-        }
-
-        /* Concept Grid */
-        .concept-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .concept-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-gold);
-            border-radius: 10px;
-            padding: 25px 15px;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .concept-card:hover {
-            border-color: var(--primary-gold);
-            transform: translateY(-5px);
-        }
-
-        .concept-card .icon {
-            font-size: 1.8rem;
-            color: var(--primary-gold);
-            margin-bottom: 12px;
-        }
-
-        .concept-card h3 {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-white);
-        }
-
-        .video-banner {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            height: 250px;
-            border: 1px solid var(--border-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .video-banner img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.5);
-        }
-
-        .play-btn {
-            position: relative;
-            z-index: 2;
-            background: rgba(0,0,0,0.6);
-            border: 2px solid var(--primary-gold);
-            color: var(--primary-gold);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-
-        .play-btn:hover {
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-        }
-
-        .video-banner-text {
-            position: absolute;
-            bottom: 20px;
-            right: 25px;
-            z-index: 2;
-            color: var(--primary-gold);
-            font-weight: bold;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        /* Decor Section */
-        .decor-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .decor-card {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 220px;
-            border: 1px solid var(--border-gold);
-        }
-
-        .decor-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.4s;
-        }
-
-        .decor-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .decor-card span {
-            position: absolute;
-            bottom: 15px;
-            left: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            color: var(--text-white);
-            border-left: 2px solid var(--primary-gold);
-        }
-
-        /* Episodes Section */
-        .episodes-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .episode-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid var(--border-gold);
-            position: relative;
-        }
-
-        .episode-img {
-            position: relative;
-            height: 150px;
-        }
-
-        .episode-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.8);
-        }
-
-        .episode-play {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 35px;
-            height: 35px;
-            background: rgba(0,0,0,0.6);
-            border: 1px solid var(--primary-gold);
-            color: var(--primary-gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-
-        .episode-info {
-            padding: 15px;
-        }
-
-        .episode-info h4 {
-            font-size: 0.9rem;
-            color: var(--text-white);
-            margin-bottom: 5px;
-        }
-
-        .episode-info p {
-            font-size: 0.8rem;
-            color: var(--text-gray);
-        }
-
-        /* Sponsors */
-        .sponsors-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            opacity: 0.85;
-            padding: 20px 0;
-        }
-
-        .sponsors-container span {
-            font-family: serif;
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #dcdcdc;
-        }
-
-        /* Call To Action Banner */
-        .cta-banner {
-            background: linear-gradient(rgba(7,7,7,0.85), rgba(7,7,7,0.85)), url('https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
-            border: 1px solid var(--border-gold);
-            border-radius: 12px;
-            padding: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 0 60px;
-            transform: translateY(50px);
-            position: relative;
-            z-index: 10;
-        }
-
-        .cta-banner h2 {
-            font-family: serif;
-            font-size: 1.8rem;
-            color: var(--primary-gold);
-            margin-bottom: 8px;
-        }
-
-        .cta-banner p {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
-
-        /* Footer */
-        footer {
-            padding: 100px 60px 40px 60px;
-            background: #030303;
-            color: var(--text-gray);
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .footer-nav {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        .footer-nav li a {
-            color: var(--text-gray);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: 0.3s;
-        }
-
-        .footer-nav li a:hover {
-            color: var(--primary-gold);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-icons a {
-            color: var(--text-white);
-            background: rgba(255,255,255,0.05);
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            border: 1px solid var(--border-gold);
-            transition: 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .social-icons a:hover {
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-        }
-
-        .copyright {
-            font-size: 0.8rem;
-            color: #666;
-            border-top: 1px solid rgba(255,255,255,0.03);
-            padding-top: 25px;
-        }
-
-        /* Responsive design adjustments */
-        @media (max-width: 1024px) {
-            .concept-grid { grid-template-columns: repeat(3, 1fr); }
-            .decor-grid, .episodes-grid { grid-template-columns: repeat(2, 1fr); }
-            .about-grid, .format-grid { grid-template-columns: 1fr; }
-            .format-stats { grid-template-columns: repeat(2, 1fr); }
-            header { padding: 15px 20px; }
-            nav { display: none; }
-            .cta-banner { flex-direction: column; text-align: center; gap: 20px; margin: 0 20px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Les Défis d’une Princesse</title>
+
+<meta name="description"
+content="Les Défis d’une Princesse - Une émission de téléréalité innovante, aventure humaine et révélateur de talents.">
+
+<style>
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--black);
+    color:var(--white);
+    line-height:1.6;
+    overflow-x:hidden;
+    transition:background .3s, color .3s;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+/* =========================================================
+   VARIABLES (Default: Gold & Black)
+========================================================= */
+
+:root{
+    --gold:#d4af37;
+    --gold-light:#f4d675;
+    --black:#080808;
+    --dark:#111;
+    --dark2:#181818;
+    --gray:#aaa;
+    --white:#fff;
+    --card-bg:#131313;
+    --border-color:#222;
+}
+
+/* Theme: Pink (Light/Glamour) */
+body.theme-pink{
+    --gold:#ff6584;
+    --gold-light:#ffb1c1;
+    --black:#120b0e;
+    --dark:#1d1217;
+    --dark2:#281820;
+    --gray:#d1b2be;
+    --white:#fff;
+    --card-bg:#1f1319;
+    --border-color:#3a202d;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:999;
+    background:rgba(8,8,8,.88);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(212,175,55,.25);
+    transition:background .3s, border-color .3s;
+}
+
+body.theme-pink header{
+    background:rgba(18,11,14,.88);
+    border-bottom:1px solid rgba(255,101,132,.25);
+}
+
+.navbar{
+    max-width:1250px;
+    margin:auto;
+    padding:18px 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:var(--gold);
+}
+
+.logo span{
+    display:block;
+    font-size:10px;
+    letter-spacing:4px;
+    color:var(--white);
+    margin-top:2px;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+nav a{
+    font-size:13px;
+    text-transform:uppercase;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--gold);
+}
+
+.controls-container{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.language, .theme-toggle{
+    background:var(--dark2);
+    color:var(--white);
+    border:1px solid var(--gold);
+    padding:8px 12px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:13px;
+    transition:.3s;
+}
+
+.theme-toggle:hover{
+    background:var(--gold);
+    color:#000;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    position:relative;
+    background: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('Pp.png');
+    background-size: cover;
+    background-position: center;
+}
+
+body.theme-pink .hero{
+    background: 
+    linear-gradient(rgba(18, 11, 14, 0.7), rgba(18, 11, 14, 0.8)),
+    url('Pp.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    right:-150px;
+    bottom:-200px;
+    border-radius:50%;
+    background:rgba(212,175,55,.12);
+    filter:blur(80px);
+}
+
+body.theme-pink .hero:after{
+    background:rgba(255,101,132,.12);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:1250px;
+    margin:auto;
+    padding:130px 25px 80px;
+    width:100%;
+}
+
+.badge{
+    display:inline-block;
+    border:1px solid var(--gold);
+    color:var(--gold-light);
+    padding:8px 15px;
+    border-radius:30px;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:clamp(50px,8vw,110px);
+    line-height:.95;
+    max-width:850px;
+    text-transform:uppercase;
+    font-weight:900;
+    letter-spacing:-3px;
+}
+
+.hero h1 span{
+    color:var(--gold);
+}
+
+.hero p{
+    max-width:650px;
+    margin:30px 0;
+    color:var(--gray);
+    font-size:18px;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:14px 27px;
+    border-radius:4px;
+    font-weight:bold;
+    transition:.3s;
+    cursor:pointer;
+    display:inline-block;
+}
+
+.btn-gold{
+    background:var(--gold);
+    color:#000;
+}
+
+.btn-gold:hover{
+    background:var(--gold-light);
+    transform:translateY(-3px);
+}
+
+.btn-outline{
+    border:1px solid #777;
+}
+
+.btn-outline:hover{
+    border-color:var(--gold);
+    color:var(--gold);
+}
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+section{
+    padding:100px 25px;
+}
+
+.container{
+    max-width:1150px;
+    margin:auto;
+}
+
+.section-title{
+    margin-bottom:55px;
+}
+
+.section-title small{
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:3px;
+}
+
+.section-title h2{
+    font-size:45px;
+    margin-top:10px;
+}
+
+.section-title p{
+    max-width:700px;
+    color:var(--gray);
+    margin-top:15px;
+}
+
+/* =========================================================
+   TRAILER / VIDEO
+========================================================= */
+
+.trailer{
+    background:var(--dark);
+    text-align:center;
+}
+
+.video-container{
+    max-width:900px;
+    margin:0 auto;
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    padding:15px;
+    box-shadow:0 25px 50px rgba(0,0,0,.5);
+}
+
+.video-wrapper{
+    position:relative;
+    padding-bottom:56.25%; /* 16:9 */
+    height:0;
+}
+
+.video-wrapper iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:0;
+}
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about{
+    background:var(--black);
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:60px;
+    align-items:center;
+}
+
+.about-text p{
+    color:var(--gray);
+    margin-bottom:20px;
+    font-size:17px;
+}
+
+.gold-line{
+    width:80px;
+    height:3px;
+    background:var(--gold);
+    margin:20px 0;
+}
+
+.about-card{
+    background:linear-gradient(145deg,var(--dark2),var(--black));
+    border:1px solid rgba(212,175,55,.3);
+    padding:40px;
+    box-shadow:0 25px 70px rgba(0,0,0,.4);
+}
+
+body.theme-pink .about-card{
+    border:1px solid rgba(255,101,132,.3);
+}
+
+.about-card h3{
+    color:var(--gold);
+    font-size:25px;
+    margin-bottom:25px;
+}
+
+.about-card ul{
+    list-style:none;
+}
+
+.about-card li{
+    padding:13px 0;
+    border-bottom:1px solid var(--border-color);
+    color:var(--gray);
+}
+
+.about-card li:before{
+    content:"✦";
+    color:var(--gold);
+    margin-right:10px;
+}
+
+/* =========================================================
+   JURY
+========================================================= */
+
+.jury{
+    background:var(--dark);
+}
+
+.jury-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.jury-card{
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    overflow:hidden;
+    transition:.3s;
+}
+
+.jury-card:hover{
+    border-color:var(--gold);
+    transform:translateY(-5px);
+}
+
+.jury-img{
+    height:280px;
+    background:#222;
+}
+
+.jury-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.jury-info{
+    padding:25px;
+}
+
+.jury-info h3{
+    color:var(--gold);
+    font-size:20px;
+    margin-bottom:5px;
+}
+
+.jury-info span{
+    color:var(--gray);
+    font-size:13px;
+    display:block;
+    margin-bottom:12px;
+}
+
+.jury-info p{
+    color:var(--gray);
+    font-size:14px;
+}
+
+/* =========================================================
+   FORMAT
+========================================================= */
+
+.format{
+    background:var(--black);
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin-bottom:60px;
+}
+
+.stat{
+    text-align:center;
+    padding:30px 15px;
+    background:var(--dark2);
+    border:1px solid var(--border-color);
+}
+
+.stat strong{
+    display:block;
+    color:var(--gold);
+    font-size:40px;
+}
+
+.stat span{
+    color:var(--gray);
+    font-size:13px;
+}
+
+.format-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.format-card{
+    padding:30px;
+    background:var(--dark);
+    border-left:3px solid var(--gold);
+}
+
+.format-card h3{
+    color:var(--gold);
+    margin-bottom:12px;
+}
+
+/* =========================================================
+   CONCEPT
+========================================================= */
+
+.concept{
+    background:var(--dark);
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.feature{
+    padding:30px;
+    background:var(--dark2);
+    border:1px solid var(--border-color);
+    transition:.3s;
+}
+
+.feature:hover{
+    transform:translateY(-5px);
+    border-color:var(--gold);
+}
+
+.feature-number{
+    color:var(--gold);
+    font-size:14px;
+    letter-spacing:2px;
+}
+
+.feature h3{
+    margin:12px 0;
+    font-size:22px;
+}
+
+.feature p{
+    color:var(--gray);
+}
+
+/* =========================================================
+   DECOR
+========================================================= */
+
+.decor{
+    background:var(--black);
+}
+
+.decor-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.decor-card{
+    min-height:250px;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    background:
+    linear-gradient(to top,rgba(0,0,0,.95),rgba(0,0,0,.1)),
+    linear-gradient(135deg,#302818,#101010);
+    border:1px solid var(--border-color);
+}
+
+body.theme-pink .decor-card{
+    background:
+    linear-gradient(to top,rgba(0,0,0,.95),rgba(0,0,0,.1)),
+    linear-gradient(135deg,#301824,#120b0e);
+}
+
+.decor-card h3{
+    color:var(--gold);
+    margin-bottom:8px;
+}
+
+.decor-card p{
+    color:var(--gray);
+    font-size:14px;
+}
+
+/* =========================================================
+   CANDIDATES
+========================================================= */
+
+.candidates{
+    background:var(--dark);
+}
+
+.candidates-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.candidate-card{
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    overflow:hidden;
+    transition:.3s;
+}
+
+.candidate-card:hover{
+    border-color:var(--gold);
+    transform:translateY(-5px);
+}
+
+.candidate-img{
+    height:280px;
+    background:#222;
+}
+
+.candidate-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.candidate-info{
+    padding:25px;
+}
+
+.candidate-info h3{
+    color:var(--gold);
+    font-size:20px;
+    margin-bottom:5px;
+}
+
+.candidate-info span{
+    color:var(--gray);
+    font-size:13px;
+    display:block;
+    margin-bottom:12px;
+}
+
+.candidate-info p{
+    color:var(--gray);
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.vote-btn{
+    width:100%;
+    padding:10px;
+    text-align:center;
+    font-size:14px;
+}
+
+/* =========================================================
+   DÉFIS INTERACTIFS (NEW SECTION)
+========================================================= */
+
+.interactive-challenges{
+    background:var(--black);
+}
+
+.challenges-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:25px;
+    margin-bottom:50px;
+}
+
+.challenge-card{
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    padding:30px;
+    position:relative;
+    transition:.3s;
+}
+
+.challenge-card:hover{
+    border-color:var(--gold);
+    transform:translateY(-5px);
+}
+
+.challenge-card h3{
+    color:var(--gold);
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.challenge-card p{
+    color:var(--gray);
+    font-size:15px;
+    margin-bottom:15px;
+}
+
+.sponsor-tag{
+    display:inline-block;
+    background:var(--dark2);
+    color:var(--gold-light);
+    border:1px solid var(--border-color);
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    margin-bottom:20px;
+}
+
+.challenge-form-box{
+    background:var(--dark);
+    border:1px solid var(--border-color);
+    padding:40px;
+    max-width:800px;
+    margin:0 auto;
+}
+
+.challenge-form-box h3{
+    color:var(--gold);
+    font-size:24px;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.challenge-form-box p{
+    color:var(--gray);
+    text-align:center;
+    margin-bottom:25px;
+    font-size:15px;
+}
+
+.challenge-form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.challenge-form input,
+.challenge-form select,
+.challenge-form textarea{
+    width:100%;
+    background:var(--dark2);
+    border:1px solid var(--border-color);
+    color:var(--white);
+    padding:12px 15px;
+    border-radius:5px;
+    font-family:inherit;
+    font-size:14px;
+}
+
+.challenge-form input:focus,
+.challenge-form select:focus,
+.challenge-form textarea:focus{
+    outline:none;
+    border-color:var(--gold);
+}
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery{
+    background:var(--dark);
+}
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.gallery-item{
+    height:250px;
+    overflow:hidden;
+    border:1px solid var(--border-color);
+    position:relative;
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.08);
+}
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.faq{
+    background:var(--black);
+}
+
+.faq-list{
+    max-width:800px;
+    margin:auto;
+}
+
+.faq-item{
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    margin-bottom:15px;
+    padding:20px;
+    border-radius:5px;
+}
+
+.faq-question{
+    color:var(--gold);
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.faq-answer{
+    color:var(--gray);
+    font-size:15px;
+}
+
+/* =========================================================
+   SPONSORS
+========================================================= */
+
+.sponsors{
+    background:var(--dark);
+}
+
+.sponsor-intro{
+    max-width:800px;
+    color:var(--gray);
+    margin-bottom:40px;
+}
+
+.sponsor-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.sponsor-card{
+    background:var(--dark2);
+    padding:30px;
+    border:1px solid var(--border-color);
+}
+
+.sponsor-card h3{
+    color:var(--gold);
+    margin-bottom:15px;
+}
+
+.sponsor-card p{
+    color:var(--gray);
+    font-size:14px;
+}
+
+/* =========================================================
+   PRESS
+========================================================= */
+
+.press{
+    background:var(--black);
+}
+
+.press-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.press-card{
+    background:var(--card-bg);
+    padding:30px;
+    border:1px solid var(--border-color);
+}
+
+.press-card h3{
+    color:var(--gold);
+    margin-bottom:10px;
+}
+
+.press-card p{
+    color:var(--gray);
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta{
+    padding:90px 25px;
+    text-align:center;
+    background:
+    radial-gradient(circle at center,rgba(212,175,55,.15),transparent 55%),
+    var(--dark);
+}
+
+body.theme-pink .cta{
+    background:
+    radial-gradient(circle at center,rgba(255,101,132,.15),transparent 55%),
+    var(--dark);
+}
+
+.cta h2{
+    font-size:45px;
+    margin-bottom:15px;
+}
+
+.cta p{
+    color:var(--gray);
+    max-width:700px;
+    margin:0 auto 30px;
+}
+
+/* =========================================================
+   FOOTER STYLES
+========================================================= */
+
+footer{
+    background:var(--black);
+    border-top:1px solid var(--border-color);
+    padding:50px 25px 25px;
+}
+
+.footer-grid{
+    max-width:1150px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-title{
+    color:var(--gold);
+    margin-bottom:15px;
+}
+
+footer p,
+footer a{
+    color:var(--gray);
+    font-size:14px;
+}
+
+footer a:hover{
+    color:var(--gold);
+}
+
+.copyright{
+    max-width:1150px;
+    margin:40px auto 0;
+    padding-top:20px;
+    border-top:1px solid var(--border-color);
+    text-align:center;
+    color:var(--gray);
+    font-size:12px;
+}
+
+/* =========================================================
+   RTL
+========================================================= */
+
+html[dir="rtl"] nav{
+    direction:rtl;
+}
+
+html[dir="rtl"] .about-card li:before{
+    margin-right:0;
+    margin-left:10px;
+}
+
+html[dir="rtl"] .format-card{
+    border-left:none;
+    border-right:3px solid var(--gold);
+}
+
+html[dir="rtl"] .hero-content,
+html[dir="rtl"] section{
+    text-align:right;
+}
+
+html[dir="rtl"] .section-title p{
+    margin-right:0;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.menu-btn{
+    display:none;
+    font-size:25px;
+    cursor:pointer;
+    color:var(--gold);
+}
+
+@media(max-width:900px){
+
+    nav{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:var(--black);
+        flex-direction:column;
+        padding:25px;
+        border-bottom:1px solid var(--gold);
+    }
+
+    nav.active{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .about-grid,
+    .jury-grid,
+    .press-grid,
+    .challenges-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .decor-grid,
+    .candidates-grid,
+    .gallery-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .sponsor-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .hero h1{
+        font-size:55px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .section-title h2{
+        font-size:34px;
+    }
+
+    .stats,
+    .format-grid,
+    .features,
+    .decor-grid,
+    .candidates-grid,
+    .gallery-grid,
+    .challenges-grid{
+        grid-template-columns:1fr;
+    }
+
+    section{
+        padding:70px 20px;
+    }
+}
+
+/* =========================================================
+   LANGUAGE TRANSITION
+========================================================= */
+
+.fade{
+    animation:fade .35s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:.3;
+        transform:translateY(5px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <span>LES DÉFIS D'UNE PRINCESSE</span>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#concept">Concept</a></li>
-                <li><a href="#format">Format</a></li>
-                <li><a href="#decor">Décor</a></li>
-                <li><a href="#episodes">Épisodes</a></li>
-                <li><a href="#sponsors">Sponsors</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="lang-switch">
-            <button class="active">FR</button>
-            <button>AR</button>
-            <button>EN</button>
-        </div>
-    </header>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <!-- Hero Section -->
-    <section class="hero" id="accueil">
-        <span class="hero-badge">ÉMISSION TÉLÉRÉALITÉ</span>
-        <h1>LES DÉFIS D'UNE PRINCESSE</h1>
-        <p>Une aventure humaine, un révélateur de talents et une plate-forme pour les femmes ambitieuses d'aujourd'hui.</p>
-        <div class="btn-group">
-            <a href="#concept" class="btn btn-primary">▶ DÉCOUVRIR LE PROGRAMME</a>
-            <a href="#contact" class="btn btn-outline">DEVENIR PARTENAIRE</a>
-        </div>
-    </section>
+<header>
 
-    <!-- About Section -->
-    <section id="apropos">
-        <div class="section-subtitle">À PROPOS DU PROGRAMME</div>
-        <h2 class="section-heading">Bien plus qu'un concours</h2>
-        <div class="about-grid">
-            <div class="about-text-box">
-                <p>Les Défis d'une Princesse est une émission de téléréalité innovante qui ambitionne de couronner une nouvelle « Miss presque parfait », en s'affranchissant des standards classiques des concours de beauté internationaux.</p>
-                <a href="#contact" class="btn btn-outline" style="padding: 10px 22px; font-size: 0.8rem;">EN SAVOIR PLUS →</a>
-            </div>
-            <div class="criteria-box">
-                <div class="criteria-title">
-                    <span>⚔️</span> ÉVALUATION MULTICRITÈRES
-                </div>
-                <ul class="criteria-list">
-                    <li>Style vestimentaire et originalité</li>
-                    <li>Mode de vie, alimentation, bien-être et activité physique</li>
-                    <li>Comportement, charisme et aisance relationnelle</li>
-                    <li>Engagement et performance dans les défis</li>
-                    <li>Expertise du jury et vote du public</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+<div class="navbar">
 
-    <!-- Format TV Section -->
-    <section id="format">
-        <div class="section-subtitle">FORMAT TV</div>
-        <h2 class="section-heading">Un format pensé pour la télévision</h2>
-        <div class="format-grid">
-            <div>
-                <div class="format-stats">
-                    <div class="stat-item">
-                        <h3>30</h3>
-                        <span>Numéros</span>
-                    </div>
-                    <div class="stat-item">
-                        <h3>1H</h3>
-                        <span>Durée</span>
-                    </div>
-                    <div class="stat-item">
-                        <h3>52</h3>
-                        <span>Minutes de contenu</span>
-                    </div>
-                    <div class="stat-item">
-                        <h3>1080P</h3>
-                        <span>Full HD</span>
-                    </div>
-                </div>
-                <div class="format-list">
-                    <ol>
-                        <li><span>01</span> <span>Billboard IN : 5 secondes</span></li>
-                        <li><span>02</span> <span>Générique IN : 1 minute</span></li>
-                        <li><span>03</span> <span>Billboard OUT : 5 secondes</span></li>
-                        <li><span>04</span> <span>Publicité : 5 minutes</span></li>
-                        <li><span>05</span> <span>5 jingles de 3 secondes</span></li>
-                        <li><span>06</span> <span>Générique OUT : 1 minute 30 s</span></li>
-                    </ol>
-                </div>
-                <div style="margin-top: 25px;">
-                    <a href="#contact" class="btn btn-outline" style="padding: 10px 22px; font-size: 0.8rem;">VOIR LE DÉTAIL DU FORMAT →</a>
-                </div>
-            </div>
-            <div class="format-video-bg">
-                <img src="https://images.unsplash.com/photo-1579965342575-16428a7c8881?q=80&w=800&auto=format&fit=crop" alt="TV Studio">
-            </div>
-        </div>
-    </section>
+<a href="#home" class="logo">
+    LES DÉFIS
+    <span>D’UNE PRINCESSE</span>
+</a>
 
-    <!-- Concept Section -->
-    <section id="concept">
-        <div class="section-subtitle">LE CONCEPT</div>
-        <h2 class="section-heading">Cinq éléments au cœur de l'aventure</h2>
-        <div class="concept-grid">
-            <div class="concept-card">
-                <div class="icon">✨</div>
-                <h3>1. Présélection</h3>
-            </div>
-            <div class="concept-card">
-                <div class="icon">👥</div>
-                <h3>2. Célébrités & professionnels</h3>
-            </div>
-            <div class="concept-card">
-                <div class="icon">⚡</div>
-                <h3>3. Élimination</h3>
-            </div>
-            <div class="concept-card">
-                <div class="icon">🎯</div>
-                <h3>4. Défis & missions</h3>
-            </div>
-            <div class="concept-card">
-                <div class="icon">💬</div>
-                <h3>5. Le confessionnal</h3>
-            </div>
-        </div>
-        <div class="video-banner">
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" alt="Candidates">
-            <a href="#concept" class="play-btn">▶</a>
-            <div class="video-banner-text">REGARDER LA VIDÉO</div>
-        </div>
-    </section>
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-    <!-- Decor Section -->
-    <section id="decor">
-        <div class="section-subtitle">L'UNIVERS</div>
-        <h2 class="section-heading">Un décor comme terrain de jeu</h2>
-        <p style="color: var(--text-gray); margin-bottom: 30px; font-size: 0.95rem;">Une villa moderne et des espaces uniques pour vivre une expérience extraordinaire.</p>
-        <div class="decor-grid">
-            <div class="decor-card">
-                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=600&auto=format&fit=crop" alt="Villa">
-                <span>Villa élégante</span>
-            </div>
-            <div class="decor-card">
-                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&auto=format&fit=crop" alt="Gym">
-                <span>Salle de sport</span>
-            </div>
-            <div class="decor-card">
-                <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?q=80&w=600&auto=format&fit=crop" alt="Supermarket">
-                <span>Hypermarché</span>
-            </div>
-            <div class="decor-card">
-                <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=600&auto=format&fit=crop" alt="Street">
-                <span>Rue commerçante</span>
-            </div>
-        </div>
-        <div style="margin-top: 30px;">
-            <a href="#contact" class="btn btn-outline" style="padding: 10px 22px; font-size: 0.8rem;">DÉCOUVRIR LE DÉCOR →</a>
-        </div>
-    </section>
+<nav id="nav">
 
-    <!-- Episodes Section -->
-    <section id="episodes">
-        <div class="section-subtitle">ÉPISODES</div>
-        <h2 class="section-heading">Plongez dans l'aventure</h2>
-        <p style="color: var(--text-gray); margin-bottom: 30px; font-size: 0.95rem;">30 épisodes remplis d'émotions, de défis et de découvertes.</p>
-        <div class="episodes-grid">
-            <div class="episode-card">
-                <div class="episode-img">
-                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=500&auto=format&fit=crop" alt="Ep 1">
-                    <div class="episode-play">▶</div>
-                </div>
-                <div class="episode-info">
-                    <h4>Épisode 1</h4>
-                    <p>Le grand départ</p>
-                </div>
-            </div>
-            <div class="episode-card">
-                <div class="episode-img">
-                    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?q=80&w=500&auto=format&fit=crop" alt="Ep 2">
-                    <div class="episode-play">▶</div>
-                </div>
-                <div class="episode-info">
-                    <h4>Épisode 2</h4>
-                    <p>Le premier défi</p>
-                </div>
-            </div>
-            <div class="episode-card">
-                <div class="episode-img">
-                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=500&auto=format&fit=crop" alt="Ep 3">
-                    <div class="episode-play">▶</div>
-                </div>
-                <div class="episode-info">
-                    <h4>Épisode 3</h4>
-                    <p>Les alliances</p>
-                </div>
-            </div>
-            <div class="episode-card">
-                <div class="episode-img">
-                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=500&auto=format&fit=crop" alt="Ep 4">
-                    <div class="episode-play">▶</div>
-                </div>
-                <div class="episode-info">
-                    <h4>Épisode 4</h4>
-                    <p>La surprise</p>
-                </div>
-            </div>
-        </div>
-        <div>
-            <a href="#contact" class="btn btn-outline" style="padding: 10px 22px; font-size: 0.8rem;">VOIR TOUS LES ÉPISODES →</a>
-        </div>
-    </section>
+<a href="#home" data-i18n="navHome">Accueil</a>
+<a href="#trailer" data-i18n="navTrailer">Teaser</a>
+<a href="#about" data-i18n="navAbout">Concept</a>
+<a href="#jury" data-i18n="navJury">Jury</a>
+<a href="#candidates" data-i18n="navCandidates">Candidates</a>
+<a href="#challenges" data-i18n="navChallenges">Défis</a>
+<a href="#gallery" data-i18n="navGallery">Galerie</a>
+<a href="#faq" data-i18n="navFaq">FAQ</a>
+<a href="#sponsors" data-i18n="navSponsors">Sponsors</a>
+<a href="#press" data-i18n="navPress">Presse</a>
+<a href="#contact" data-i18n="navContact">Contact</a>
 
-    <!-- Sponsors Section -->
-    <section id="sponsors">
-        <div class="section-subtitle">NOS PARTENAIRES</div>
-        <h2 class="section-heading">Une visibilité forte pour les marques</h2>
-        <p style="color: var(--text-gray); margin-bottom: 30px; font-size: 0.90rem;">De nombreuses opportunités de visibilité et d'intégration pour les sponsors et partenaires.</p>
-        <div class="sponsors-container">
-            <span>L'ORÉAL</span>
-            <span>SAMSUNG</span>
-            <span>Coca-Cola</span>
-            <span>Dove</span>
-            <span>NESCAFÉ</span>
-            <span>OPPO</span>
-        </div>
-        <div style="margin-top: 30px;">
-            <a href="#contact" class="btn btn-outline" style="padding: 10px 22px; font-size: 0.8rem;">DÉCOUVRIR LES OFFRES →</a>
-        </div>
-    </section>
+<div class="controls-container">
+    <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" data-i18n="themeBtn">🌸 Rose</button>
+    <select class="language" id="language" onchange="changeLanguage(this.value)">
+    <option value="fr">FR</option>
+    <option value="ar">AR</option>
+    <option value="en">EN</option>
+    </select>
+</div>
 
-    <!-- CTA Contact Banner -->
-    <div class="cta-banner" id="contact">
-        <div>
-            <h2>Rejoignez l'aventure</h2>
-            <p>Vous êtes une marque, un média, un partenaire ou un professionnel intéressé par le projet ? Contactez la production.</p>
-        </div>
-        <a href="mailto:contact@lesdefisduneprincesse.com" class="btn btn-primary">CONTACTER LA PRODUCTION →</a>
-    </div>
+</nav>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="logo" style="font-size: 0.9rem;">
-                <span>LES DÉFIS D'UNE PRINCESSE</span>
-            </div>
-            <ul class="footer-nav">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#concept">Concept</a></li>
-                <li><a href="#format">Format</a></li>
-                <li><a href="#decor">Décor</a></li>
-                <li><a href="#episodes">Épisodes</a></li>
-                <li><a href="#sponsors">Sponsors</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="social-icons">
-                <a href="#">IG</a>
-                <a href="#">FB</a>
-                <a href="#">YT</a>
-                <a href="#">TT</a>
-            </div>
-        </div>
-        <div class="copyright">
-            © 2026 Les Défis d'une Princesse — Tous droits réservés.
-        </div>
-    </footer>
+</div>
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+<div class="badge" data-i18n="heroBadge">
+    Émission de téléréalité
+</div>
+
+<h1>
+    <span data-i18n="heroTitle1">Les Défis</span><br>
+    <span data-i18n="heroTitle2">d’une Princesse</span>
+</h1>
+
+<p data-i18n="heroDescription">
+    Une aventure humaine, un révélateur de talents et une
+    plateforme pour les femmes ambitieuses d’aujourd’hui.
+</p>
+
+<div class="buttons">
+
+<a href="#trailer" class="btn btn-gold" data-i18n="discover">
+    Voir le Teaser
+</a>
+
+<a href="#sponsors" class="btn btn-outline" data-i18n="beSponsor">
+    Devenir partenaire
+</a>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     TRAILER / VIDEO SECTION
+===================================================== -->
+
+<section class="trailer" id="trailer">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="trailerSmall">Bande Annonce</small>
+<h2 data-i18n="trailerTitle">Découvrez le Teaser Officiel</h2>
+</div>
+
+<div class="video-container">
+<div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Teaser" allowfullscreen></iframe>
+</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section class="about" id="about">
+
+<div class="container">
+
+<div class="section-title">
+
+<small data-i18n="aboutSmall">
+    Le concept
+</small>
+
+<h2 data-i18n="aboutTitle">
+    Bien plus qu’un concours
+</h2>
+
+<p data-i18n="aboutIntro">
+    Une nouvelle approche de la téléréalité qui place
+    la personnalité, le talent et le développement professionnel
+    au cœur de l’aventure.
+</p>
+
+</div>
+
+
+<div class="about-grid">
+
+<div class="about-text">
+
+<div class="gold-line"></div>
+
+<p data-i18n="aboutText1">
+    Les Défis d’une Princesse est une émission de téléréalité
+    innovante qui ambitionne de couronner une nouvelle
+    « Miss presque parfait », en s’affranchissant des standards
+    classiques des concours de beauté internationaux.
+</p>
+
+<p data-i18n="aboutText2">
+    Bien plus qu’un concours de beauté, l’émission propose
+    un véritable parcours d’accompagnement professionnel.
+    Les participantes sont encouragées à poursuivre leurs
+    aspirations dans les domaines de la comédie, de l’animation
+    télévisée ou encore du mannequinat.
+</p>
+
+<p data-i18n="aboutText3">
+    Chaque candidate est invitée à affirmer sa personnalité,
+    exprimer sa créativité et construire son identité professionnelle.
+</p>
+
+</div>
+
+
+<div class="about-card">
+
+<h3 data-i18n="evaluationTitle">
+    Évaluation multicritères
+</h3>
+
+<ul>
+
+<li data-i18n="evaluation1">
+    Style vestimentaire et originalité
+</li>
+
+<li data-i18n="evaluation2">
+    Mode de vie, alimentation, bien-être et activité physique
+</li>
+
+<li data-i18n="evaluation3">
+    Comportement, charisme et aisance relationnelle
+</li>
+
+<li data-i18n="evaluation4">
+    Engagement et performance dans les défis
+</li>
+
+<li data-i18n="evaluation5">
+    Expertise du jury et vote du public
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     JURY & EXPERTS
+===================================================== -->
+
+<section class="jury" id="jury">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="jurySmall">Les Experts</small>
+<h2 data-i18n="juryTitle">Le Jury & Les Coachs</h2>
+<p data-i18n="juryIntro">Des professionnels reconnus pour accompagner et guider les candidates tout au long de l'aventure.</p>
+</div>
+
+<div class="jury-grid">
+
+<div class="jury-card">
+<div class="jury-img">
+    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Marc Vane">
+</div>
+<div class="jury-info">
+    <h3>Marc Vane</h3>
+    <span data-i18n="j1Role">Directeur Artistique & Metteur en scène</span>
+    <p data-i18n="j1Desc">Expert en image et mise en valeur de la personnalité scénique.</p>
+</div>
+</div>
+
+<div class="jury-card">
+<div class="jury-img">
+    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Leila Dridi">
+</div>
+<div class="jury-info">
+    <h3>Leila Dridi</h3>
+    <span data-i18n="j2Role">Coach de vie & Relations publiques</span>
+    <p data-i18n="j2Desc">Spécialiste en communication et développement personnel.</p>
+</div>
+</div>
+
+<div class="jury-card">
+<div class="jury-img">
+    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Antoine de Saint-Loup">
+</div>
+<div class="jury-info">
+    <h3>Antoine de Saint-Loup</h3>
+    <span data-i18n="j3Role">Producteur & Critique de Mode</span>
+    <p data-i18n="j3Desc">Figure incontournable du stylisme et des tendances internationales.</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     FORMAT
+===================================================== -->
+
+<section class="format" id="format">
+
+<div class="container">
+
+<div class="section-title">
+
+<small data-i18n="formatSmall">
+    Format TV
+</small>
+
+<h2 data-i18n="formatTitle">
+    Un format pensé pour la télévision
+</h2>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+<strong>30</strong>
+<span data-i18n="episodes">Numéros</span>
+</div>
+
+<div class="stat">
+<strong>1H</strong>
+<span data-i18n="duration">Durée</span>
+</div>
+
+<div class="stat">
+<strong>52</strong>
+<span data-i18n="content">Minutes de contenu</span>
+</div>
+
+<div class="stat">
+<strong>1080P</strong>
+<span data-i18n="quality">Full HD</span>
+</div>
+
+</div>
+
+
+<div class="format-grid">
+
+<div class="format-card">
+<h3>01</h3>
+<p data-i18n="format1">Billboard IN : 5 secondes</p>
+</div>
+
+<div class="format-card">
+<h3>02</h3>
+<p data-i18n="format2">Générique IN : 1 minute</p>
+</div>
+
+<div class="format-card">
+<h3>03</h3>
+<p data-i18n="format3">Billboard OUT : 5 secondes</p>
+</div>
+
+<div class="format-card">
+<h3>04</h3>
+<p data-i18n="format4">Publicité : 5 minutes</p>
+</div>
+
+<div class="format-card">
+<h3>05</h3>
+<p data-i18n="format5">5 jingles de 3 secondes</p>
+</div>
+
+<div class="format-card">
+<h3>06</h3>
+<p data-i18n="format6">Générique OUT : 1 minute 30 secondes</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     CONCEPT / MECHANISM
+===================================================== -->
+
+<section class="concept">
+
+<div class="container">
+
+<div class="section-title">
+
+<small data-i18n="mechanismSmall">
+    Le mécanisme
+</small>
+
+<h2 data-i18n="mechanismTitle">
+    Cinq éléments au cœur de l’aventure
+</h2>
+
+</div>
+
+
+<div class="features">
+
+<div class="feature">
+<div class="feature-number">01</div>
+<h3 data-i18n="feature1Title">Présélection</h3>
+<p data-i18n="feature1Text">Une présélection des candidates basée sur leurs profils psychologiques et physiques afin de garantir un casting cohérent et captivant.</p>
+</div>
+
+<div class="feature">
+<div class="feature-number">02</div>
+<h3 data-i18n="feature2Title">Célébrités & professionnels</h3>
+<p data-i18n="feature2Text">Une célébrité est invitée régulièrement afin d’apporter des conseils pertinents et une dynamique nouvelle.</p>
+</div>
+
+<div class="feature">
+<div class="feature-number">03</div>
+<h3 data-i18n="feature3Title">Élimination</h3>
+<p data-i18n="feature3Text">Un système d’élimination basé sur les appréciations du jury, les notes attribuées et le vote des téléspectateurs.</p>
+</div>
+
+<div class="feature">
+<div class="feature-number">04</div>
+<h3 data-i18n="feature4Title">Défis & missions</h3>
+<p data-i18n="feature4Text">Des missions et tâches destinées à maintenir une activité télégénique constante et à développer la créativité.</p>
+</div>
+
+<div class="feature">
+<div class="feature-number">05</div>
+<h3 data-i18n="feature5Title">Le confessionnal</h3>
+<p data-i18n="feature5Text">Un espace individuel permettant aux candidates d’exprimer leurs pensées, émotions et relations au sein du groupe.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     DECOR
+===================================================== -->
+
+<section class="decor" id="decor">
+
+<div class="container">
+
+<div class="section-title">
+
+<small data-i18n="decorSmall">
+    L’univers
+</small>
+
+<h2 data-i18n="decorTitle">
+    Un décor comme terrain de jeu
+</h2>
+
+<p data-i18n="decorIntro">
+    Un décor fixe pensé comme un véritable microcosme
+    du quotidien rêvé des candidates.
+</p>
+
+</div>
+
+
+<div class="decor-grid">
+
+<div class="decor-card">
+<h3 data-i18n="villaTitle">Villa élégante</h3>
+<p data-i18n="villaText">Grand salon, cuisine ouverte et chambres à thème, lieu des discussions, complicités et tensions.</p>
+</div>
+
+<div class="decor-card">
+<h3 data-i18n="gymTitle">Salle de sport</h3>
+<p data-i18n="gymText">Équipements modernes, espace yoga et mur miroir, dédiés au bien-être et au dépassement de soi.</p>
+</div>
+
+<div class="decor-card">
+<h3 data-i18n="marketTitle">Hypermarché</h3>
+<p data-i18n="marketText">Un véritable espace de course pour les défis de gestion, rapidité et créativité culinaire.</p>
+</div>
+
+<div class="decor-card">
+<h3 data-i18n="streetTitle">Rue commerçante</h3>
+<p data-i18n="streetText">Boutiques de mode, beauté et décoration pour tester le goût, le style et l’intelligence pratique.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     CANDIDATES / VOTING
+===================================================== -->
+
+<section class="candidates" id="candidates">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="candidatesSmall">Le Casting</small>
+<h2 data-i18n="candidatesTitle">Les Candidates & Vote du Public</h2>
+<p data-i18n="candidatesIntro">Découvrez les talents de cette édition et soutenez votre candidate préférée en votant.</p>
+</div>
+
+<div class="candidates-grid">
+
+<div class="candidate-card">
+<div class="candidate-img">
+    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Inès Benali">
+</div>
+<div class="candidate-info">
+    <h3>Inès Benali</h3>
+    <span data-i18n="c1Age">24 ans — Paris</span>
+    <p data-i18n="c1Desc">Passionnée de comédie et de mode.</p>
+    <button class="btn btn-gold vote-btn" onclick="voteFor('c1', this)">
+        <span data-i18n="voteText">Voter</span> (<span id="votes-c1">1240</span>)
+    </button>
+</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Sarah Kettani">
+</div>
+<div class="candidate-info">
+    <h3>Sarah Kettani</h3>
+    <span data-i18n="c2Age">26 ans — Casablanca</span>
+    <p data-i18n="c2Desc">Entrepreneure et passionnée d'art dramatique.</p>
+    <button class="btn btn-gold vote-btn" onclick="voteFor('c2', this)">
+        <span data-i18n="voteText">Voter</span> (<span id="votes-c2">980</span>)
+    </button>
+</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" alt="Lina Mansour">
+</div>
+<div class="candidate-info">
+    <h3>Lina Mansour</h3>
+    <span data-i18n="c3Age">22 ans — Montréal</span>
+    <p data-i18n="c3Desc">Étudiante en journalisme et mannequin.</p>
+    <button class="btn btn-gold vote-btn" onclick="voteFor('c3', this)">
+        <span data-i18n="voteText">Voter</span> (<span id="votes-c3">1450</span>)
+    </button>
+</div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     DÉFIS INTERACTIFS (NEW SECTION)
+===================================================== -->
+
+<section class="interactive-challenges" id="challenges">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="challengesSmall">Interaction</small>
+<h2 data-i18n="challengesTitle">Les Défis du Public & Partenaires</h2>
+<p data-i18n="challengesIntro">Participez à nos défis interactifs inspirés de l'émission, intégrez les produits de nos partenaires et tentez de remporter des prix exclusifs.</p>
+</div>
+
+<div class="challenges-grid">
+
+<div class="challenge-card">
+<span class="sponsor-tag" data-i18n="sponsorTag1">Partenaire: EWOPTIC</span>
+<h3 data-i18n="ch1Title">Le Défi Style</h3>
+<p data-i18n="ch1Desc">Coordonnez une tenue quotidienne ou de soirée inspirée de l'émission en mettant en valeur les lunettes ou accessoires de notre partenaire.</p>
+</div>
+
+<div class="challenge-card">
+<span class="sponsor-tag" data-i18n="sponsorTag2">Partenaire: Bien-être & Nutrition</span>
+<h3 data-i18n="ch2Title">Le Défi Mode de Vie</h3>
+<p data-i18n="ch2Desc">Partagez votre routine sportive ou de bien-être quotidienne en intégrant les produits de nos partenaires associés.</p>
+</div>
+
+<div class="challenge-card">
+<span class="sponsor-tag" data-i18n="sponsorTag3">Partenaire: Production & Casting</span>
+<h3 data-i18n="ch3Title">Le Défi Comédie et Rôle</h3>
+<p data-i18n="ch3Desc">Enregistrez un court passage théâtral ou humoristique de 30 secondes en utilisant le produit du sponsor comme accessoire central.</p>
+</div>
+
+<div class="challenge-card">
+<span class="sponsor-tag" data-i18n="sponsorTag4">Partenaire: Le Jury Populaire</span>
+<h3 data-i18n="ch4Title">Le Jury Populaire & Quiz</h3>
+<p data-i18n="ch4Desc">Évaluez les performances des candidates et répondez aux questions de l'épisode pour gagner des packs cadeaux exclusifs.</p>
+</div>
+
+</div>
+
+<div class="challenge-form-box">
+<h3 data-i18n="formBoxTitle">Envoyez votre participation</h3>
+<p data-i18n="formBoxDesc">Remplissez le formulaire ci-dessous pour soumettre votre vidéo ou vos réponses au défi de la semaine.</p>
+
+<form class="challenge-form" onsubmit="submitChallenge(event)">
+    <input type="text" placeholder="Nom complet" data-i18n-placeholder="namePlaceholder" required>
+    <input type="email" placeholder="Adresse e-mail" data-i18n-placeholder="emailPlaceholder" required>
+    <select required>
+        <option value="" disabled selected data-i18n="selectChallenge">Choisissez un défi</option>
+        <option value="style" data-i18n="opt1">Le Défi Style</option>
+        <option value="lifestyle" data-i18n="opt2">Le Défi Mode de Vie</option>
+        <option value="comedy" data-i18n="opt3">Le Défi Comédie et Rôle</option>
+        <option value="jury" data-i18n="opt4">Le Jury Populaire & Quiz</option>
+    </select>
+    <textarea rows="4" placeholder="Lien de votre vidéo ou description de votre participation..." data-i18n-placeholder="descPlaceholder" required></textarea>
+    <button type="submit" class="btn btn-gold" data-i18n="submitBtn">Soumettre ma participation</button>
+</form>
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     GALLERY / BEHIND THE SCENES
+===================================================== -->
+
+<section class="gallery" id="gallery">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="gallerySmall">Immersion</small>
+<h2 data-i18n="galleryTitle">Galerie & Coulisses</h2>
+<p data-i18n="galleryIntro">Un aperçu exclusif des tournages et des moments forts en coulisses.</p>
+</div>
+
+<div class="gallery-grid">
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt="Photo 1"></div>
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=600&q=80" alt="Photo 2"></div>
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=600&q=80" alt="Photo 3"></div>
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     FAQ SECTION
+===================================================== -->
+
+<section class="faq" id="faq">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="faqSmall">Aide</small>
+<h2 data-i18n="faqTitle">Questions Fréquentes</h2>
+</div>
+
+<div class="faq-list">
+
+<div class="faq-item">
+<div class="faq-question" data-i18n="faq1Q">Comment participer aux castings des saisons futures ?</div>
+<div class="faq-answer" data-i18n="faq1A">Vous pouvez soumettre votre candidature directement via notre formulaire de contact ou en envoyant votre book aux équipes de production.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question" data-i18n="faq2Q">Comment fonctionne le système de vote public ?</div>
+<div class="faq-answer" data-i18n="faq2A">Chaque utilisateur peut voter une seule fois par candidate depuis la section dédiée du site web.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question" data-i18n="faq3Q">Quels sont les avantages pour les sponsors partenaires ?</div>
+<div class="faq-answer" data-i18n="faq3A">Les partenaires bénéficient d'une visibilité TV complète (billboards, placement produit) et d'une présence forte sur nos plateformes digitales.</div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     SPONSORS
+===================================================== -->
+
+<section class="sponsors" id="sponsors">
+
+<div class="container">
+
+<div class="section-title">
+
+<small data-i18n="sponsorSmall">
+    Partenariat
+</small>
+
+<h2 data-i18n="sponsorTitle">
+    Une visibilité forte pour les marques
+</h2>
+
+<p class="sponsor-intro" data-i18n="sponsorIntro">
+    Le programme propose plusieurs dispositifs de visibilité
+    et d’intégration pour les sponsors et partenaires.
+</p>
+
+</div>
+
+
+<div class="sponsor-grid">
+
+<div class="sponsor-card">
+<h3 data-i18n="sponsor1Title">Visibilité TV</h3>
+<p data-i18n="sponsor1Text">Billboard IN/OUT à chaque épisode et prime, présence dans les promotions et spots avant, après et au milieu du programme.</p>
+</div>
+
+<div class="sponsor-card">
+<h3 data-i18n="sponsor2Title">Placement produit</h3>
+<p data-i18n="sponsor2Text">Possibilité de placement du produit lors des quotidiennes du programme.</p>
+</div>
+
+<div class="sponsor-card">
+<h3 data-i18n="sponsor3Title">Réseaux sociaux</h3>
+<p data-i18n="sponsor3Text">Présence de la marque sur les réseaux sociaux du programme, notamment Instagram et Facebook.</p>
+</div>
+
+<div class="sponsor-card">
+<h3 data-i18n="sponsor4Title">Branding candidates</h3>
+<p data-i18n="sponsor4Text">Logo présent sur les T-shirts portés par les candidates.</p>
+</div>
+
+<div class="sponsor-card">
+<h3 data-i18n="sponsor5Title">Soirée de couronnement</h3>
+<p data-i18n="sponsor5Text">Présence du sponsor sur les supports de communication de la soirée : magazine, journal, page Facebook et affiches.</p>
+</div>
+
+<div class="sponsor-card">
+<h3 data-i18n="sponsor6Title">Expérience partenaire</h3>
+<p data-i18n="sponsor6Text">Citation et remerciements du sponsor par l’animatrice lors de chaque prime, ainsi que possibilités de visibilité et shooting professionnel.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     PRESS ROOM
+===================================================== -->
+
+<section class="press" id="press">
+
+<div class="container">
+
+<div class="section-title">
+<small data-i18n="pressSmall">Médias</small>
+<h2 data-i18n="pressTitle">Espace Presse & Kit Média</h2>
+<p data-i18n="pressIntro">Téléchargez les communiqués officiels et les visuels en haute résolution.</p>
+</div>
+
+<div class="press-grid">
+
+<div class="press-card">
+<h3 data-i18n="press1Title">Dossier de Presse Officiel</h3>
+<p data-i18n="press1Desc">Présentation complète du concept, de la grille et des profils des talents.</p>
+<a href="#" class="btn btn-outline" data-i18n="downloadBtn">Télécharger (PDF)</a>
+</div>
+
+<div class="press-card">
+<h3 data-i18n="press2Title">Kit Logo & Visuels HD</h3>
+<p data-i18n="press2Desc">Logotypes officiels, bannières et photos de presse libres de droits.</p>
+<a href="#" class="btn btn-outline" data-i18n="downloadBtn">Télécharger (ZIP)</a>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta" id="contact">
+
+<div class="container">
+
+<h2 data-i18n="ctaTitle">
+    Rejoignez l’aventure
+</h2>
+
+<p data-i18n="ctaText">
+    Vous êtes une marque, un média, un partenaire ou un professionnel
+    intéressé par le projet ? Contactez la production.
+</p>
+
+<a href="mailto:contact@votre-domaine.com"
+class="btn btn-gold"
+data-i18n="contactButton">
+    Contacter la production
+</a>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+
+<div class="logo">
+    LES DÉFIS
+    <span>D’UNE PRINCESSE</span>
+</div>
+
+<br>
+
+<p data-i18n="footerDescription">
+    Une émission de téléréalité innovante,
+    aventure humaine et révélateur de talents.
+</p>
+
+</div>
+
+
+<div>
+
+<h3 class="footer-title" data-i18n="footerNavigation">
+    Navigation
+</h3>
+
+<p><a href="#home" data-i18n="navHome">Accueil</a></p>
+<p><a href="#about" data-i18n="navAbout">Concept</a></p>
+<p><a href="#candidates" data-i18n="navCandidates">Candidates</a></p>
+<p><a href="#challenges" data-i18n="navChallenges">Défis</a></p>
+<p><a href="#gallery" data-i18n="navGallery">Galerie</a></p>
+<p><a href="#sponsors" data-i18n="navSponsors">Sponsors</a></p>
+
+</div>
+
+
+<div>
+
+<h3 class="footer-title" data-i18n="footerProject">
+    Projet
+</h3>
+
+<p data-i18n="footerFormat">
+    Format : 30 numéros
+</p>
+
+<p data-i18n="footerDuration">
+    Durée : 1 heure
+</p>
+
+<p>
+    Full HD / 1080P
+</p>
+
+</div>
+
+</div>
+
+
+<div class="copyright">
+© 2026 Les Défis d’une Princesse — Tous droits réservés.
+</div>
+
+</footer>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+/* =========================================================
+   MENU MOBILE
+========================================================= */
+
+function toggleMenu(){
+    document.getElementById("nav").classList.toggle("active");
+}
+
+
+/* =========================================================
+   THEME TOGGLE (Gold <-> Pink)
+========================================================= */
+
+function toggleTheme(){
+    const body = document.body;
+    const isPink = body.classList.toggle("theme-pink");
+    
+    const currentLang = document.documentElement.lang || "fr";
+    const themeBtn = document.getElementById("themeToggleBtn");
+    
+    if(isPink){
+        localStorage.setItem("preferredTheme", "pink");
+        if(currentLang === "ar") themeBtn.textContent = "⭐ ذهبي";
+        else if(currentLang === "en") themeBtn.textContent = "⭐ Gold";
+        else themeBtn.textContent = "⭐ Or";
+    } else {
+        localStorage.setItem("preferredTheme", "gold");
+        if(currentLang === "ar") themeBtn.textContent = "🌸 وردي";
+        else if(currentLang === "en") themeBtn.textContent = "🌸 Pink";
+        else themeBtn.textContent = "🌸 Rose";
+    }
+}
+
+
+/* =========================================================
+   VOTING FUNCTION
+========================================================= */
+
+function voteFor(candidateId, btnElement) {
+    const hasVoted = localStorage.getItem("voted_" + candidateId);
+    
+    if (hasVoted) {
+        alert("Vous avez déjà voté pour cette candidate !");
+        return;
+    }
+
+    let countSpan = document.getElementById("votes-" + candidateId);
+    let currentVotes = parseInt(countSpan.textContent);
+    currentVotes++;
+    countSpan.textContent = currentVotes;
+
+    localStorage.setItem("voted_" + candidateId, "true");
+    btnElement.style.background = "var(--dark2)";
+    btnElement.style.color = "var(--gold)";
+    btnElement.style.borderColor = "var(--gold)";
+    btnElement.disabled = true;
+}
+
+
+/* =========================================================
+   CHALLENGE SUBMISSION FUNCTION
+========================================================= */
+
+function submitChallenge(event){
+    event.preventDefault();
+    alert("Votre participation au défi a bien été envoyée avec succès ! Merci de votre interaction.");
+    event.target.reset();
+}
+
+
+/* =========================================================
+   TRANSLATIONS
+========================================================= */
+
+const translations = {
+
+fr:{
+
+navHome:"Accueil",
+navTrailer:"Teaser",
+navAbout:"Concept",
+navJury:"Jury",
+navCandidates:"Candidates",
+navChallenges:"Défis",
+navGallery:"Galerie",
+navFaq:"FAQ",
+navSponsors:"Sponsors",
+navPress:"Presse",
+navContact:"Contact",
+themeBtn:"🌸 Rose",
+
+heroBadge:"Émission de téléréalité",
+heroTitle1:"Les Défis",
+heroTitle2:"d’une Princesse",
+heroDescription:"Une aventure humaine, un révélateur de talents et une plateforme pour les femmes ambitieuses d’aujourd’hui.",
+discover:"Voir le Teaser",
+beSponsor:"Devenir partenaire",
+
+trailerSmall:"Bande Annonce",
+trailerTitle:"Découvrez le Teaser Officiel",
+
+aboutSmall:"Le concept",
+aboutTitle:"Bien plus qu’un concours",
+aboutIntro:"Une nouvelle approche de la téléréalité qui place la personnalité, le talent et le développement professionnel au cœur de l’aventure.",
+aboutText1:"Les Défis d’une Princesse est une émission de téléréalité innovante qui ambitionne de couronner une nouvelle « Miss presque parfait », en s’affranchissant des standards classiques des concours de beauté internationaux.",
+aboutText2:"Bien plus qu’un concours de beauté, l’émission propose un véritable parcours d’accompagnement professionnel. Les participantes sont encouragées à poursuivre leurs aspirations dans les domaines de la comédie, de l’animation télévisée ou encore du mannequinat.",
+aboutText3:"Chaque candidate est invitée à affirmer sa personnalité, exprimer sa créativité et construire son identité professionnelle.",
+
+evaluationTitle:"Évaluation multicritères",
+evaluation1:"Style vestimentaire et originalité",
+evaluation2:"Mode de vie, alimentation, bien-être et activité physique",
+evaluation3:"Comportement, charisme et aisance relationnelle",
+evaluation4:"Engagement et performance dans les défis",
+evaluation5:"Expertise du jury et vote du public",
+
+jurySmall:"Les Experts",
+juryTitle:"Le Jury & Les Coachs",
+juryIntro:"Des professionnels reconnus pour accompagner et guider les candidates tout au long de l'aventure.",
+j1Role:"Directeur Artistique & Metteur en scène",
+j1Desc:"Expert en image et mise en valeur de la personnalité scénique.",
+j2Role:"Coach de vie & Relations publiques",
+j2Desc:"Spécialiste en communication et développement personnel.",
+j3Role:"Producteur & Critique de Mode",
+j3Desc:"Figure incontournable du stylisme et des tendances internationales.",
+
+formatSmall:"Format TV",
+formatTitle:"Un format pensé pour la télévision",
+episodes:"Numéros",
+duration:"Durée",
+content:"Minutes de contenu",
+quality:"Full HD",
+format1:"Billboard IN : 5 secondes",
+format2:"Générique IN : 1 minute",
+format3:"Billboard OUT : 5 secondes",
+format4:"Publicité : 5 minutes",
+format5:"5 jingles de 3 secondes",
+format6:"Générique OUT : 1 minute 30 secondes",
+
+mechanismSmall:"Le mécanisme",
+mechanismTitle:"Cinq éléments au cœur de l’aventure",
+feature1Title:"Présélection",
+feature1Text:"Une présélection des candidates basée sur leurs profils psychologiques et physiques afin de garantir un casting cohérent et captivant.",
+feature2Title:"Célébrités & professionnels",
+feature2Text:"Une célébrité est invitée régulièrement afin d’apporter des conseils pertinents et une dynamique nouvelle.",
+feature3Title:"Élimination",
+feature3Text:"Un système d’élimination basé sur les appréciations du jury, les notes attribuées et le vote des téléspectateurs.",
+feature4Title:"Défis & missions",
+feature4Text:"Des missions et tâches destinées à maintenir une activité télégénique constante et à développer la créativité.",
+feature5Title:"Le confessionnal",
+feature5Text:"Un espace individuel permettant aux candidates d’exprimer leurs pensées, émotions et relations au sein du groupe.",
+
+decorSmall:"L’univers",
+decorTitle:"Un décor comme terrain de jeu",
+decorIntro:"Un décor fixe pensé comme un véritable microcosme du quotidien rêvé des candidates.",
+villaTitle:"Villa élégante",
+villaText:"Grand salon, cuisine ouverte et chambres à thème, lieu des discussions, complicités et tensions.",
+gymTitle:"Salle de sport",
+gymText:"Équipements modernes, espace yoga et mur miroir, dédiés au bien-être et au dépassement de soi.",
+marketTitle:"Hypermarché",
+marketText:"Un véritable espace de course pour les défis de gestion, rapidité et créativité culinaire.",
+streetTitle:"Rue commerçante",
+streetText:"Boutiques de mode, beauté et décoration pour tester le goût, le style et l’intelligence pratique.",
+
+candidatesSmall:"Le Casting",
+candidatesTitle:"Les Candidates & Vote du Public",
+candidatesIntro:"Découvrez les talents de cette édition et soutenez votre candidate préférée en votant.",
+voteText:"Voter",
+c1Age:"24 ans — Paris",
+c1Desc:"Passionnée de comédie et de mode.",
+c2Age:"26 ans — Casablanca",
+c2Desc:"Entrepreneure et passionnée d'art dramatique.",
+c3Age:"22 ans — Montréal",
+c3Desc:"Étudiante en journalisme et mannequin.",
+
+challengesSmall:"Interaction",
+challengesTitle:"Les Défis du Public & Partenaires",
+challengesIntro:"Participez à nos défis interactifs inspirés de l'émission, intégrez les produits de nos partenaires et tentez de remporter des prix exclusifs.",
+sponsorTag1:"Partenaire: EWOPTIC",
+ch1Title:"Le Défi Style",
+ch1Desc:"Coordonnez une tenue quotidienne ou de soirée inspirée de l'émission en mettant en valeur les lunettes ou accessoires de notre partenaire.",
+sponsorTag2:"Partenaire: Bien-être & Nutrition",
+ch2Title:"Le Défi Mode de Vie",
+ch2Desc:"Partagez votre routine sportive ou de bien-être quotidienne en intégrant les produits de nos partenaires associés.",
+sponsorTag3:"Partenaire: Production & Casting",
+ch3Title:"Le Défi Comédie et Rôle",
+ch3Desc:"Enregistrez un court passage théâtral ou humoristique de 30 secondes en utilisant le produit du sponsor comme accessoire central.",
+sponsorTag4:"Partenaire: Le Jury Populaire",
+ch4Title:"Le Jury Populaire & Quiz",
+ch4Desc:"Évaluez les performances des candidates et répondez aux questions de l'épisode pour gagner des packs cadeaux exclusifs.",
+formBoxTitle:"Envoyez votre participation",
+formBoxDesc:"Remplissez le formulaire ci-dessous pour soumettre votre vidéo ou vos réponses au défi de la semaine.",
+namePlaceholder:"Nom complet",
+emailPlaceholder:"Adresse e-mail",
+selectChallenge:"Choisissez un défi",
+opt1:"Le Défi Style",
+opt2:"Le Défi Mode de Vie",
+opt3:"Le Défi Comédie et Rôle",
+opt4:"Le Jury Populaire & Quiz",
+descPlaceholder:"Lien de votre vidéo ou description de votre participation...",
+submitBtn:"Soumettre ma participation",
+
+gallerySmall:"Immersion",
+galleryTitle:"Galerie & Coulisses",
+galleryIntro:"Un aperçu exclusif des tournages et des moments forts en coulisses.",
+
+faqSmall:"Aide",
+faqTitle:"Questions Fréquentes",
+faq1Q:"Comment participer aux castings des saisons futures ?",
+faq1A:"Vous pouvez soumettre votre candidature directement via notre formulaire de contact ou en envoyant votre book aux équipes de production.",
+faq2Q:"Comment fonctionne le système de vote public ?",
+faq2A:"Chaque utilisateur peut voter une seule fois par candidate depuis la section dédiée du site web.",
+faq3Q:"Quels sont les avantages pour les sponsors partenaires ?",
+faq3A:"Les partenaires bénéficient d'une visibilité TV complète (billboards, placement produit) et d'une présence forte sur nos plateformes digitales.",
+
+sponsorSmall:"Partenariat",
+sponsorTitle:"Une visibilité forte pour les marques",
+sponsorIntro:"Le programme propose plusieurs dispositifs de visibilité et d’intégration pour les sponsors et partenaires.",
+sponsor1Title:"Visibilité TV",
+sponsor1Text:"Billboard IN/OUT à chaque épisode et prime, présence dans les promotions et spots avant, après et au milieu du programme.",
+sponsor2Title:"Placement produit",
+sponsor2Text:"Possibilité de placement du produit lors des quotidiennes du programme.",
+sponsor3Title:"Réseaux sociaux",
+sponsor3Text:"Présence de la marque sur les réseaux sociaux du programme, notamment Instagram et Facebook.",
+sponsor4Title:"Branding candidates",
+sponsor4Text:"Logo présent sur les T-shirts portés par les candidates.",
+sponsor5Title:"Soirée de couronnement",
+sponsor5Text:"Présence du sponsor sur les supports de communication de la soirée : magazine, journal, page Facebook et affiches.",
+sponsor6Title:"Expérience partenaire",
+sponsor6Text:"Citation et remerciements du sponsor par l’animatrice lors de chaque prime, ainsi que possibilités de visibilité et shooting professionnel.",
+
+pressSmall:"Médias",
+pressTitle:"Espace Presse & Kit Média",
+pressIntro:"Téléchargez les communiqués officiels et les visuels en haute résolution.",
+press1Title:"Dossier de Presse Officiel",
+press1Desc:"Présentation complète du concept, de la grille et des profils des talents.",
+press2Title:"Kit Logo & Visuels HD",
+press2Desc:"Logotypes officiels, bannières et photos de presse libres de droits.",
+downloadBtn:"Télécharger",
+
+ctaTitle:"Rejoignez l’aventure",
+ctaText:"Vous êtes une marque, un média, un partenaire ou un professionnel intéressé par le projet ? Contactez la production.",
+contactButton:"Contacter la production",
+
+footerDescription:"Une émission de téléréalité innovante, aventure humaine et révélateur de talents.",
+footerNavigation:"Navigation",
+footerProject:"Projet",
+footerFormat:"Format : 30 numéros",
+footerDuration:"Durée : 1 heure"
+
+},
+
+
+ar:{
+
+navHome:"الرئيسية",
+navTrailer:"الإعلان",
+navAbout:"فكرة البرنامج",
+navJury:"لجنة التحكيم",
+navCandidates:"المشتركات",
+navChallenges:"التحديات",
+navGallery:"المعرض",
+navFaq:"الأسئلة",
+navSponsors:"الرعاة",
+navPress:"الصحافة",
+navContact:"اتصل بنا",
+themeBtn:"🌸 وردي",
+
+heroBadge:"برنامج تلفزيون الواقع",
+heroTitle1:"تحديات",
+heroTitle2:"أميرة",
+heroDescription:"مغامرة إنسانية، منصة لاكتشاف المواهب، وفرصة للنساء الطموحات لبناء مستقبلهن المهني.",
+discover:"شاهد الإعلان",
+beSponsor:"كن شريكاً",
+
+trailerSmall:"الإعلان الترويجي",
+trailerTitle:"تعرف على التويزر الرسمي للبرنامج",
+
+aboutSmall:"فكرة البرنامج",
+aboutTitle:"أكثر من مجرد مسابقة",
+aboutIntro:"مقاربة جديدة لبرامج تلفزيون الواقع تضع الشخصية والموهبة والتطور المهني في قلب المغامرة.",
+aboutText1:"تحديات أميرة هو برنامج تلفزيون واقع مبتكر يهدف إلى تتويج ملكة جديدة «Miss presque parfait»، بعيداً عن المعايير التقليدية لمسابقات الجمال الدولية.",
+aboutText2:"البرنامج يتجاوز مفهوم مسابقة الجمال ليقدم مساراً حقيقياً للمرافقة والتطوير المهني، حيث يتم تشجيع المشاركات على متابعة طموحاتهن في مجالات التمثيل والتنشيط التلفزيوني وعالم عرض الأزياء.",
+aboutText3:"تُدعى كل مشاركة إلى إبراز شخصيتها والتعبير عن إبداعها وبناء هويتها المهنية.",
+
+evaluationTitle:"نظام تقييم متعدد المعايير",
+evaluation1:"الأناقة والتميز في اختيار الملابس",
+evaluation2:"نمط الحياة، التغذية، العافية والنشاط البدني",
+evaluation3:"السلوك، الكاريزما والقدرة على التواصل",
+evaluation4:"الالتزام والأداء في التحديات اليومية",
+evaluation5:"خبرة لجنة التحكيم وتصويت الجمهور",
+
+jurySmall:"الخبراء",
+juryTitle:"لجنة التحكيم والمدربون",
+juryIntro:"محترفون معتمدون لمرافقة وتوجيه المشتركات طوال فترة المغامرة.",
+j1Role:"مدير فني ومخرج مسرحي",
+j1Desc:"خبير في الصورة وإبراز الشخصية على المسرح.",
+j2Role:"مدربة حياة وعلاقات عامة",
+j2Desc:"متخصصة في التواصل والتطوير الشخصي.",
+j3Role:"منتج وناقد أزياء",
+j3Desc:"شخصية بارزة في عالم التصميم والموضة العالمية.",
+
+formatSmall:"الفورما التلفزيوني",
+formatTitle:"صيغة مصممة للتلفزيون",
+episodes:"حلقة / رقم",
+duration:"المدة",
+content:"دقيقة محتوى",
+quality:"Full HD",
+format1:"Billboard IN : 5 ثوانٍ",
+format2:"الشارة الافتتاحية : دقيقة واحدة",
+format3:"Billboard OUT : 5 ثوانٍ",
+format4:"الإعلانات : 5 دقائق",
+format5:"5 فواصل قصيرة × 3 ثوانٍ",
+format6:"الشارة الختامية : دقيقة و30 ثانية",
+
+mechanismSmall:"آلية البرنامج",
+mechanismTitle:"خمسة عناصر في قلب المغامرة",
+feature1Title:"الاختيار الأولي",
+feature1Text:"اختيار المشاركات اعتماداً على ملفاتهن النفسية والجسدية لضمان اختيار متناسق وجذاب.",
+feature2Title:"مشاهير ومحترفون",
+feature2Text:"استضافة شخصية مشهورة بشكل منتظم لتقديم النصائح وإضفاء ديناميكية جديدة على البرنامج.",
+feature3Title:"الإقصاء",
+feature3Text:"نظام إقصاء يعتمد على تقييم لجنة التحكيم والنقاط الممنوحة وتصويت المشاهدين.",
+feature4Title:"التحديات والمهام",
+feature4Text:"مهام وتحديات مستمرة للحفاظ على إيقاع تلفزيوني جذاب وتشجيع الإبداع.",
+feature5Title:"غرفة الاعتراف",
+feature5Text:"مساحة فردية تستطيع فيها المشاركات التعبير عن أفكارهن ومشاعرهن وعلاقاتهن داخل المجموعة.",
+
+decorSmall:"عالم البرنامج",
+decorTitle:"ديكور يتحول إلى ساحة للمغامرة",
+decorIntro:"ديكور ثابت مصمم ليكون صورة مصغرة للحياة اليومية التي تحلم بها المشاركات.",
+villaTitle:"فيلا أنيقة",
+villaText:"صالون كبير، مطبخ مفتوح وغرف ذات طابع مختلف، حيث تظهر النقاشات والصداقات والتوترات.",
+gymTitle:"قاعة رياضية",
+gymText:"معدات حديثة، مساحة يوغا وجدار مرايا، مخصصة للعافية وتطوير الذات.",
+marketTitle:"سوق تجاري كبير",
+marketText:"فضاء حقيقي للتسوق تُقام فيه تحديات الإدارة والسرعة والإبداع في الطبخ.",
+streetTitle:"شارع تجاري",
+streetText:"محلات للموضة والجمال والديكور لاختبار الذوق والأسلوب والذكاء العملي.",
+
+candidatesSmall:"المترشحات",
+candidatesTitle:"المشتركات وتصويت الجمهور",
+candidatesIntro:"تعرفي على مواهب هذا الموسم وادعمي مرشحتك المفضلة بالتصويت.",
+voteText:"صوت",
+c1Age:"24 سنة — باريس",
+c1Desc:"شغوفة بالكوميديا والموضة.",
+c2Age:"26 سنة — الدار البيضاء",
+c2Desc:"رائدة أعمال وشغوفة بالفن الدرامي.",
+c3Age:"22 سنة — مونتريال",
+c3Desc:"طالبة صحافة وعارضة أزياء.",
+
+challengesSmall:"التفاعل",
+challengesTitle:"تحديات الجمهور والشركاء",
+challengesIntro:"شارك في تحدياتنا التفاعلية المستوحاة من البرنامج، وأبرز منتجات شركائنا، واربح جوائز حصرية.",
+sponsorTag1:"الشريك: EWOPTIC",
+ch1Title:"تحدي الأناقة والموضة",
+ch1Desc:"قم بتنسيق إطلالة يومية أو سهرة مستوحاة من أجواء البرنامج، مع إبراز منتج الشريك بطريقة عصرية.",
+sponsorTag2:"الشريك: نمط الحياة الصحي",
+ch2Title:"تحدي نمط الحياة الصحي",
+ch2Desc:"شاركنا فيديو قصير يوثق روتينك الرياضي أو الصحي اليومي مع دمج منتجات الرعاة.",
+sponsorTag3:"الشريك: الأداء الفني والكوميدي",
+ch3Title:"تحدي الأداء الفني والكوميدي",
+ch3Desc:"قدم مقطعاً تمثيلياً قصيرًا لا يتجاوز 30 ثانية مستخدماً منتج الشريك كعنصر درامي إبداعي.",
+sponsorTag4:"الشريك: لجنة تحكيم الجمهور",
+ch4Title:"تحدي لجنة تحكيم الجمهور",
+ch4Desc:"قيم أداء المرشحات أو أجب عن أسئلة المسابقة التفاعلية المرتبطة بأحداث الحلقات.",
+formBoxTitle:"أرسل مشاركتك الآن",
+formBoxDesc:"املأ النموذج أدناه لإرسال مشاركتك في التحدي وتأكيد تفاعلك معنا.",
+namePlaceholder:"الاسم الكامل",
+emailPlaceholder:"البريد الإلكتروني",
+selectChallenge:"اختر التحدي المناسب",
+opt1:"تحدي الأناقة والموضة",
+opt2:"تحدي نمط الحياة الصحي",
+opt3:"تحدي الأداء الفني والكوميدي",
+opt4:"تحدي لجنة تحكيم الجمهور",
+descPlaceholder:"رابط الفيديو أو تفاصيل مشاركتك...",
+submitBtn:"إرسال المشاركة",
+
+gallerySmall:"الصور",
+galleryTitle:"معرض الصور والكواليس",
+galleryIntro:"نظرة حصرية على كواليس التصوير واللحظات المميزة خلف الكواليس.",
+
+faqSmall:"مساعدة",
+faqTitle:"الأسئلة الشائعة",
+faq1Q:"كيف يمكن المشاركة في تجارب الأداء للمواسم القادمة؟",
+faq1A:"يمكنك إرسال طلبك مباشرة عبر استمارة الاتصال أو عبر إرسال ملفك الشخصي لفريق الإنتاج.",
+faq2Q:"كيف يعمل نظام التصويت الجماهيري؟",
+faq2A:"يمكن لكل مستخدم التصويت مرة واحدة لكل مرشحة من خلال القسم المخصص في الموقع.",
+faq3Q:"ما هي مزايا الرعاية والشراكة؟",
+faq3A:"يحظى الشركاء بظهور تلفزيوني متكامل وإدماج تجاري وحضور قوي عبر منصاتنا الرقمية.",
+
+sponsorSmall:"الشراكة",
+sponsorTitle:"ظهور قوي للعلامات التجارية",
+sponsorIntro:"يوفر البرنامج مجموعة من فرص الظهور والدمج التجاري للرعاة والشركاء.",
+sponsor1Title:"الظهور التلفزيوني",
+sponsor1Text:"Billboard قبل وبعد كل حلقة وPrime، بالإضافة إلى الظهور في العروض الترويجية والإعلانات.",
+sponsor2Title:"دمج المنتج",
+sponsor2Text:"إمكانية إدماج المنتج داخل الحلقات اليومية للبرنامج.",
+sponsor3Title:"شبكات التواصل",
+sponsor3Text:"ظهور العلامة التجارية على شبكات البرنامج الاجتماعية، خصوصاً Instagram وFacebook.",
+sponsor4Title:"علامة الراعي على ملابس المشاركات",
+sponsor4Text:"إظهار شعار العلامة التجارية على القمصان التي ترتديها المشاركات.",
+sponsor5Title:"سهرة التتويج",
+sponsor5Text:"حضور الراعي على مختلف وسائل الاتصال الخاصة بسهرة التتويج.",
+sponsor6Title:"تجربة الشريك",
+sponsor6Text:"ذكر وشكر الراعي من طرف المقدمة خلال كل Prime، إضافة إلى فرص التصوير الاحترافي.",
+
+pressSmall:"الإعلام",
+pressTitle:"المركز الصحفي وحزمة الوسائط",
+pressIntro:"قم بتحميل البيانات الرسمية والمواد المرئية بدقة عالية.",
+press1Title:"الملف الصحفي الرسمي",
+press1Desc:"عرض شامل لفكرة البرنامج، الشبكة البرمجية وملفات المواهب.",
+press2Title:"حزمة الشعار والرسومات عالية الدقة",
+press2Desc:"الشعارات الرسمية واللافتات وصور الصحافة الخالية من حقوق الملكية.",
+downloadBtn:"تحميل الملف",
+
+ctaTitle:"انضم إلى المغامرة",
+ctaText:"هل أنت علامة تجارية أو وسيلة إعلام أو شريك أو محترف مهتم بالمشروع؟ تواصل مع الإنتاج.",
+contactButton:"اتصل بالإنتاج",
+
+footerDescription:"برنامج تلفزيون واقع مبتكر، مغامرة إنسانية ومنصة لاكتشاف المواهب.",
+footerNavigation:"التنقل",
+footerProject:"المشروع",
+footerFormat:"الفورما: 30 حلقة",
+footerDuration:"المدة: ساعة واحدة"
+
+},
+
+
+en:{
+
+navHome:"Home",
+navTrailer:"Teaser",
+navAbout:"Concept",
+navJury:"Jury",
+navCandidates:"Candidates",
+navChallenges:"Challenges",
+navGallery:"Gallery",
+navFaq:"FAQ",
+navSponsors:"Sponsors",
+navPress:"Press",
+navContact:"Contact",
+themeBtn:"🌸 Pink",
+
+heroBadge:"Reality TV Show",
+heroTitle1:"The Challenges",
+heroTitle2:"of a Princess",
+heroDescription:"A human adventure, a talent reveal and a platform for ambitious women of today.",
+discover:"Watch Teaser",
+beSponsor:"Become a partner",
+
+trailerSmall:"Trailer",
+trailerTitle:"Discover the Official Teaser",
+
+aboutSmall:"The concept",
+aboutTitle:"More than a beauty contest",
+aboutIntro:"A new approach to reality television placing personality, talent and professional development at the heart of the adventure.",
+aboutText1:"The Challenges of a Princess is an innovative reality TV show aiming to crown a new «Miss presque parfait», moving beyond the traditional standards of international beauty contests.",
+aboutText2:"More than a beauty contest, the show offers a genuine professional development journey. Participants are encouraged to pursue their ambitions in acting, television presenting and modelling.",
+aboutText3:"Each candidate is invited to express her personality, creativity and build her professional identity.",
+
+evaluationTitle:"Multi-criteria evaluation",
+evaluation1:"Fashion style and originality",
+evaluation2:"Lifestyle, nutrition, wellness and physical activity",
+evaluation3:"Behaviour, charisma and communication skills",
+evaluation4:"Commitment and performance in daily challenges",
+evaluation5:"Jury expertise and audience voting",
+
+jurySmall:"The Experts",
+juryTitle:"Jury & Coaches",
+juryIntro:"Recognized professionals to guide and support candidates throughout the adventure.",
+j1Role:"Artistic Director & Stage Manager",
+j1Desc:"Expert in image enhancement and stage personality.",
+j2Role:"Life Coach & PR Specialist",
+j2Desc:"Specialist in communication and personal development.",
+j3Role:"Producer & Fashion Critic",
+j3Desc:"Key figure in fashion styling and international trends.",
+
+formatSmall:"TV Format",
+formatTitle:"A format designed for television",
+episodes:"Episodes",
+duration:"Duration",
+content:"Minutes of content",
+quality:"Full HD",
+format1:"Billboard IN: 5 seconds",
+format2:"Opening credits: 1 minute",
+format3:"Billboard OUT: 5 seconds",
+format4:"Advertising: 5 minutes",
+format5:"5 jingles × 3 seconds",
+format6:"Closing credits: 1 minute 30 seconds",
+
+mechanismSmall:"The mechanism",
+mechanismTitle:"Five elements at the heart of the adventure",
+feature1Title:"Pre-selection",
+feature1Text:"Candidates are pre-selected according to psychological and physical profiles to ensure a coherent and engaging casting.",
+feature2Title:"Celebrities & professionals",
+feature2Text:"A celebrity regularly joins the candidates to provide advice and introduce a new dynamic.",
+feature3Title:"Elimination",
+feature3Text:"An elimination system based on jury evaluations, scores and audience voting.",
+feature4Title:"Challenges & missions",
+feature4Text:"Missions and tasks designed to maintain a constant television rhythm and encourage creativity.",
+feature5Title:"The Confessional",
+feature5Text:"A private space where candidates can express their thoughts, emotions and relationships within the group.",
+
+decorSmall:"The universe",
+decorTitle:"A set designed as a playground",
+decorIntro:"A fixed set designed as a true microcosm of the lifestyle dreamed of by the candidates.",
+villaTitle:"Elegant Villa",
+villaText:"A large living room, open kitchen and themed bedrooms where conversations, friendships and tensions unfold.",
+gymTitle:"Design Gym",
+gymText:"Modern equipment, yoga space and mirror wall dedicated to wellness and self-improvement.",
+marketTitle:"Full-scale Hypermarket",
+marketText:"A real shopping environment for challenges involving management, speed and culinary creativity.",
+streetTitle:"Stylized Shopping Street",
+streetText:"Fashion, beauty and decoration boutiques designed to test taste, style and practical intelligence.",
+
+candidatesSmall:"The Casting",
+candidatesTitle:"Candidates & Public Voting",
+candidatesIntro:"Discover the talents of this edition and support your favorite candidate.",
+voteText:"Vote",
+c1Age:"24 yrs — Paris",
+c1Desc:"Passionate about comedy and fashion.",
+c2Age:"26 yrs — Casablanca",
+c2Desc:"Entrepreneur and passionate about drama.",
+c3Age:"22 yrs — Montreal",
+c3Desc:"Journalism student and model.",
+
+challengesSmall:"Interaction",
+challengesTitle:"Public & Partner Challenges",
+challengesIntro:"Join our interactive challenges inspired by the show, feature our partners' products, and win exclusive prizes.",
+sponsorTag1:"Partner: EWOPTIC",
+ch1Title:"The Style Challenge",
+ch1Desc:"Coordinate a daily or evening look inspired by the show, highlighting our partner's products.",
+sponsorTag2:"Partner: Wellness & Nutrition",
+ch2Title:"The Lifestyle Challenge",
+ch2Desc:"Share your daily routine featuring our partners' wellness or sports products.",
+sponsorTag3:"Partner: Production & Casting",
+ch3Title:"The Comedy & Role Challenge",
+ch3Desc:"Record a short 30-second acting monologue using the partner's product as a creative props.",
+sponsorTag4:"Partner: People's Jury",
+ch4Title:"The People's Jury & Quiz",
+ch4Desc:"Evaluate candidate performances and answer interactive weekly episode trivia.",
+formBoxTitle:"Submit Your Entry",
+formBoxDesc:"Fill out the form below to submit your video or response for this week's challenge.",
+namePlaceholder:"Full Name",
+emailPlaceholder:"Email Address",
+selectChallenge:"Select a Challenge",
+opt1:"The Style Challenge",
+opt2:"The Lifestyle Challenge",
+opt3:"The Comedy & Role Challenge",
+opt4:"The People's Jury & Quiz",
+descPlaceholder:"Video link or participation description...",
+submitBtn:"Submit Participation",
+
+gallerySmall:"Immersion",
+galleryTitle:"Gallery & Behind the Scenes",
+galleryIntro:"An exclusive look at the shoots and highlights behind the scenes.",
+
+faqSmall:"Support",
+faqTitle:"Frequently Asked Questions",
+faq1Q:"How to participate in future casting seasons?",
+faq1A:"You can submit your application directly via our contact form or send your portfolio to the production team.",
+faq2Q:"How does the public voting system work?",
+faq2A:"Each user can vote once per candidate from the dedicated section of the website.",
+faq3Q:"What are the benefits for partner sponsors?",
+faq3A:"Partners benefit from complete TV visibility, product placement, and strong digital exposure.",
+
+sponsorSmall:"Partnership",
+sponsorTitle:"Strong brand visibility",
+sponsorIntro:"The show offers multiple visibility and brand integration opportunities for sponsors and partners.",
+sponsor1Title:"TV Visibility",
+sponsor1Text:"IN/OUT billboards for every episode and prime, promotional exposure and spots before, after and during the programme.",
+sponsor2Title:"Product Placement",
+sponsor2Text:"Product placement opportunities within the daily episodes.",
+sponsor3Title:"Social Media",
+sponsor3Text:"Brand presence across the show's social media platforms, including Instagram and Facebook.",
+sponsor4Title:"Candidate Branding",
+sponsor4Text:"Brand logo displayed on T-shirts worn by the candidates.",
+sponsor5Title:"Crowning Ceremony",
+sponsor5Text:"Sponsor presence across communication materials for the crowning ceremony.",
+sponsor6Title:"Partner Experience",
+sponsor6Text:"Sponsor mentions and acknowledgements by the presenter during each prime.",
+
+pressSmall:"Media",
+pressTitle:"Press Room & Media Kit",
+pressIntro:"Download official press releases and high-resolution visuals.",
+press1Title:"Official Press Kit",
+press1Desc:"Comprehensive presentation of the concept, grid and talent profiles.",
+press2Title:"Logo & HD Visuals Kit",
+press2Desc:"Official logotypes, banners and royalty-free press photos.",
+downloadBtn:"Download",
+
+ctaTitle:"Join the adventure",
+ctaText:"Are you a brand, media outlet, partner or professional interested in the project? Contact the production team.",
+contactButton:"Contact Production",
+
+footerDescription:"An innovative reality TV show, a human adventure and a platform for discovering talent.",
+footerNavigation:"Navigation",
+footerProject:"Project",
+footerFormat:"Format: 30 episodes",
+footerDuration:"Duration: 1 hour"
+
+}
+
+};
+
+
+/* =========================================================
+   CHANGE LANGUAGE
+========================================================= */
+
+function changeLanguage(lang){
+
+    const data = translations[lang];
+
+    document.documentElement.lang = lang;
+
+    if(lang === "ar"){
+        document.documentElement.dir = "rtl";
+    }else{
+        document.documentElement.dir = "ltr";
+    }
+
+    document.body.classList.add("fade");
+
+    setTimeout(()=>{
+
+        document.querySelectorAll("[data-i18n]").forEach(element=>{
+
+            const key = element.getAttribute("data-i18n");
+
+            if(data[key]){
+                element.textContent = data[key];
+            }
+
+        });
+
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(element=>{
+            const key = element.getAttribute("data-i18n-placeholder");
+            if(data[key]){
+                element.placeholder = data[key];
+            }
+        });
+
+        document.body.classList.remove("fade");
+
+    },150);
+
+    localStorage.setItem("preferredLanguage", lang);
+    
+    const isPink = document.body.classList.contains("theme-pink");
+    const themeBtn = document.getElementById("themeToggleBtn");
+    if(isPink){
+        if(lang === "ar") themeBtn.textContent = "⭐ ذهبي";
+        else if(lang === "en") themeBtn.textContent = "⭐ Gold";
+        else themeBtn.textContent = "⭐ Or";
+    } else {
+        if(lang === "ar") themeBtn.textContent = "🌸 وردي";
+        else if(lang === "en") themeBtn.textContent = "🌸 Pink";
+        else themeBtn.textContent = "🌸 Rose";
+    }
+}
+
+
+/* =========================================================
+   LOAD SAVED SETTINGS
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const savedTheme = localStorage.getItem("preferredTheme");
+    if(savedTheme === "pink"){
+        document.body.classList.add("theme-pink");
+    }
+
+    const savedLanguage = localStorage.getItem("preferredLanguage") || "fr";
+    document.getElementById("language").value = savedLanguage;
+    changeLanguage(savedLanguage);
+
+});
+
+</script>
 
 </body>
 </html>
