@@ -164,18 +164,21 @@ nav a:hover{
     display:flex;
     align-items:center;
     position:relative;
-        background: 
+    background: 
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url('Pp.png');
     background-size: cover;
     background-position: center;
-}body.theme-pink .hero{
+}
+
+body.theme-pink .hero{
     background: 
     linear-gradient(rgba(18, 11, 14, 0.7), rgba(18, 11, 14, 0.8)),
     url('Pp.png');
     background-size: cover;
     background-position: center;
 }
+
 .hero:after{
     content:"";
     position:absolute;
@@ -915,76 +918,9 @@ body.theme-pink .cta{
 }
 
 /* =========================================================
-   FOOTER
+   FOOTER STYLES
 ========================================================= */
 
-<footer>
-
-<div class="footer-grid">
-
-<div>
-
-<div class="logo">
-    LES DÉFIS
-    <span>D’UNE PRINCESSE</span>
-</div>
-
-<br>
-
-<p data-i18n="footerDescription">
-    Une émission de téléréalité innovante,
-    aventure humaine et révélateur de talents.
-</p>
-
-</div>
-
-
-<div>
-
-<h3 class="footer-title" data-i18n="footerNavigation">
-    Navigation
-</h3>
-
-<p><a href="#home" data-i18n="navHome">Accueil</a></p>
-<p><a href="#about" data-i18n="navAbout">Concept</a></p>
-<p><a href="#candidates" data-i18n="navCandidates">Candidates</a></p>
-<p><a href="#challenges" data-i18n="navChallenges">Défis</a></p>
-<p><a href="#gallery" data-i18n="navGallery">Galerie</a></p>
-<p><a href="#sponsors" data-i18n="navSponsors">Sponsors</a></p>
-
-</div>
-
-
-<div>
-
-<h3 class="footer-title" data-i18n="footerProject">
-    Projet
-</h3>
-
-<p data-i18n="footerFormat">
-    Format : 30 numéros
-</p>
-
-<p data-i18n="footerDuration">
-    Durée : 1 heure
-</p>
-
-<p>
-    Full HD / 1080P
-</p>
-
-</div>
-
-</div>
-
-
-<div class="copyright">
-© 2026 Les Défis d’une Princesse — Tous droits réservés.
-</div>
-
-</footer>
-
-<style>
 footer{
     background:var(--black);
     border-top:1px solid var(--border-color);
@@ -1023,11 +959,10 @@ footer a:hover{
     color:var(--gray);
     font-size:12px;
 }
-</style>
 
-<!-- =========================================================
+/* =========================================================
    RTL
-========================================================= -->
+========================================================= */
 
 html[dir="rtl"] nav{
     direction:rtl;
@@ -1927,6 +1862,77 @@ data-i18n="contactButton">
 </div>
 
 </section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+
+<div class="logo">
+    LES DÉFIS
+    <span>D’UNE PRINCESSE</span>
+</div>
+
+<br>
+
+<p data-i18n="footerDescription">
+    Une émission de téléréalité innovante,
+    aventure humaine et révélateur de talents.
+</p>
+
+</div>
+
+
+<div>
+
+<h3 class="footer-title" data-i18n="footerNavigation">
+    Navigation
+</h3>
+
+<p><a href="#home" data-i18n="navHome">Accueil</a></p>
+<p><a href="#about" data-i18n="navAbout">Concept</a></p>
+<p><a href="#candidates" data-i18n="navCandidates">Candidates</a></p>
+<p><a href="#challenges" data-i18n="navChallenges">Défis</a></p>
+<p><a href="#gallery" data-i18n="navGallery">Galerie</a></p>
+<p><a href="#sponsors" data-i18n="navSponsors">Sponsors</a></p>
+
+</div>
+
+
+<div>
+
+<h3 class="footer-title" data-i18n="footerProject">
+    Projet
+</h3>
+
+<p data-i18n="footerFormat">
+    Format : 30 numéros
+</p>
+
+<p data-i18n="footerDuration">
+    Durée : 1 heure
+</p>
+
+<p>
+    Full HD / 1080P
+</p>
+
+</div>
+
+</div>
+
+
+<div class="copyright">
+© 2026 Les Défis d’une Princesse — Tous droits réservés.
+</div>
+
+</footer>
 
 
 <!-- =====================================================
